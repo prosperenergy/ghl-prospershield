@@ -22,6 +22,10 @@ Mode: read-only inventory. No customer sends, SMS fallback, workflow activations
 - Agency browser routes supplied counts, last-login, and phone status for non-main locations.
 - Telnyx brand and 10DLC campaign probes returned Telnyx 10005 resource-not-found on the tested endpoints, while env still contains brand/campaign identifiers.
 
+## AI Injection Entry Point
+
+Use https://ghl.prospershield.io/ai-context.md as the first file when attaching this map to another AI. Then attach or reference https://ghl.prospershield.io/data/ghl-live-map.json as the source of truth. The AI context tells assistants how to answer Prosper-specific GHL, connector, and setup questions without inventing secrets or recommending unsafe live actions.
+
 ## GHL Subaccounts
 
 | Subaccount | ID | Last login | Activity | Contacts/leads | Opportunities | Visible phone | Phone status |

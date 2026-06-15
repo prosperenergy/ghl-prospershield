@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ghl.prospershield.io/</loc></url>
+  <url><loc>https://ghl.prospershield.io/ai-context.md</loc></url>
   <url><loc>https://ghl.prospershield.io/data/ghl-live-map.json</loc></url>
   <url><loc>https://ghl.prospershield.io/data/ai-index.json</loc></url>
   <url><loc>https://ghl.prospershield.io/llms.txt</loc></url>

@@ -1,6 +1,6 @@
 {
   "title": "Prosper Shield GHL Live Map",
-  "generatedAt": "2026-06-15T18:58:58.168Z",
+  "generatedAt": "2026-06-15T19:26:43.807Z",
   "sourceGeneratedAt": "2026-06-15T01:09:32.083Z",
   "canonicalUrl": "https://ghl.prospershield.io",
   "safety": {
@@ -21,6 +21,11 @@
     "n8nWorkflows": 16,
     "makeScenarios": 10,
     "telnyxPhoneNumbers": 14
+  },
+  "aiIngestion": {
+    "primaryContext": "https://ghl.prospershield.io/ai-context.md",
+    "recommendedInstruction": "Attach or paste ai-context.md first, then use data/ghl-live-map.json as the source of truth for counts, routes, connector statuses, and setup guidance.",
+    "safeAnswerPattern": "Answer with the system, current status, supporting JSON path or report section, risk, and next non-destructive setup step. Do not invent secret values."
   },
   "sections": [
     {
@@ -188,6 +193,7 @@
     "What is safe to publish and what is redacted?"
   ],
   "sourceFiles": {
+    "aiContext": "https://ghl.prospershield.io/ai-context.md",
     "fullData": "https://ghl.prospershield.io/data/ghl-live-map.json",
     "aiIndex": "https://ghl.prospershield.io/data/ai-index.json",
     "markdownReport": "https://ghl.prospershield.io/docs/GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md",
