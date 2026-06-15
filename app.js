@@ -36,6 +36,7 @@ function renderKpis(data) {
     ["n8n workflows", data.n8n.workflows.length],
     ["Telnyx numbers", data.telnyx.phoneNumbers.length],
     ["Credential refs", data.totals.credentialRefs],
+    ["Routes", data.totals.connectionRoutes],
   ];
   $("kpis").innerHTML = kpis
     .map(([label, value]) => `<div class="kpi"><strong>${fmt.format(value)}</strong><span>${label}</span></div>`)
@@ -79,6 +80,37 @@ function renderCredentials(data) {
     { label: "Connector", key: "connector" },
     { label: "Credential refs", render: (r) => (r.credentialRefs || []).join(", ") },
     { label: "Login / auth note", key: "loginStatus" },
+  ], rows);
+}
+
+function renderCredentialRoutes(data) {
+  const rows = rowsFor(data.credentialMap.routes || []);
+  $("route-count").textContent = `${rows.length} routes visible`;
+  renderTable($("routes-table"), [
+    { label: "Route", key: "route" },
+    { label: "Status", key: "status" },
+    { label: "Source", key: "source" },
+    { label: "Connector", key: "connector" },
+    { label: "Target", key: "target" },
+    { label: "Credential refs", render: (r) => (r.credentialRefs || []).join(", ") },
+    { label: "Live objects", key: "liveObjects" },
+    { label: "Notes", key: "notes" },
+  ], rows);
+}
+
+function renderCredentialDetails(data) {
+  const rows = rowsFor(data.credentialMap.details || []);
+  $("credential-detail-count").textContent = `${rows.length} refs visible`;
+  renderTable($("credential-detail-table"), [
+    { label: "Ref", key: "name" },
+    { label: "System", key: "system" },
+    { label: "Kind", key: "kind" },
+    { label: "Set", key: "valueState" },
+    { label: "Occurrences", key: "occurrences" },
+    { label: "Validation", key: "validation" },
+    { label: "Public handling", key: "publicHandling" },
+    { label: "Role", key: "role" },
+    { label: "Route", key: "route" },
   ], rows);
 }
 
@@ -194,6 +226,8 @@ function render() {
   renderAccounts(data);
   renderCards(data);
   renderCredentials(data);
+  renderCredentialRoutes(data);
+  renderCredentialDetails(data);
   renderN8n(data);
   renderGhlPages(data);
   renderProsperMain(data);
