@@ -501,6 +501,16 @@ Raw token/password/login values are not published. This table maps the credentia
 - Social blast remains held until Craig gives explicit go.
 - Webhook URLs, API tokens, and credentials are intentionally redacted from this wiki and the site data.
 
+## Navigation And AI Access
+
+- Light and dark mode are supported on the public site.
+- The first screen includes a plain-English overview, needs-attention board, and system translation cards for non-technical readers.
+- Search covers account names, phone numbers, credential refs, auth statuses, connector routes, workflow names, and system names.
+- AI-readable guide: https://ghl.prospershield.io/llms.txt
+- AI-readable index: https://ghl.prospershield.io/data/ai-index.json
+- Full data JSON: https://ghl.prospershield.io/data/ghl-live-map.json
+- Markdown report: https://ghl.prospershield.io/docs/GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md
+
 ## Search Site
 
 Live site: https://ghl.prospershield.io

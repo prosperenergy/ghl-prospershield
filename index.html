@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Prosper GHL Map</title>
+    <meta name="description" content="Searchable Prosper Shield GHL, Make, n8n, Telnyx, credential, and connector map with redacted secrets." />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -15,19 +16,58 @@
       <div class="meta">
         <span id="updated">Loading...</span>
         <span>Read-only</span>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">Dark</button>
       </div>
     </header>
 
     <main>
       <section class="controls" aria-label="Search and filters">
-        <input id="search" type="search" placeholder="Search accounts, numbers, workflows, hooks, users..." autofocus />
+        <input id="search" type="search" placeholder="Search plain English or exact refs: Setmore, needs-reauth, Telnyx, GHL_API_TOKEN, Cole..." autofocus />
         <div class="chips" id="chips"></div>
       </section>
+      <div class="search-status" id="search-status"></div>
+
+      <nav class="section-nav" aria-label="Map sections">
+        <a href="#start">Start</a>
+        <a href="#health">Health</a>
+        <a href="#accounts">Accounts</a>
+        <a href="#credentials">Credentials</a>
+        <a href="#routes">Routes</a>
+        <a href="#refs">Refs</a>
+        <a href="#automations">Automations</a>
+        <a href="#phones">Phones</a>
+      </nav>
 
       <section class="kpis" id="kpis"></section>
 
+      <section class="grid" id="start" data-ai-section="operator-start">
+        <article class="panel wide intro-panel">
+          <div class="panel-head">
+            <h2>Start Here</h2>
+            <span>Plain English</span>
+          </div>
+          <div class="intro-grid" id="plain-summary"></div>
+        </article>
+
+        <article class="panel" id="health" data-ai-section="action-board">
+          <div class="panel-head">
+            <h2>Needs Attention</h2>
+            <span id="attention-count"></span>
+          </div>
+          <div id="attention-list" class="stack"></div>
+        </article>
+
+        <article class="panel" data-ai-section="glossary">
+          <div class="panel-head">
+            <h2>Translation</h2>
+            <span>System names</span>
+          </div>
+          <div id="glossary-list" class="stack"></div>
+        </article>
+      </section>
+
       <section class="grid">
-        <article class="panel wide">
+        <article class="panel wide" id="accounts" data-ai-section="ghl-subaccounts">
           <div class="panel-head">
             <h2>Sub-Accounts</h2>
             <span id="account-count"></span>
@@ -37,21 +77,21 @@
           </div>
         </article>
 
-        <article class="panel">
+        <article class="panel" data-ai-section="phone-risks">
           <div class="panel-head">
             <h2>Phone Risks</h2>
           </div>
           <div id="phone-risks" class="stack"></div>
         </article>
 
-        <article class="panel">
+        <article class="panel" data-ai-section="integration-summary">
           <div class="panel-head">
             <h2>GHL / Make / n8n / Telnyx</h2>
           </div>
           <div id="integration-summary" class="stack"></div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" id="credentials" data-ai-section="credential-systems">
           <div class="panel-head">
             <h2>Credentials / Logins / Connectors</h2>
             <span id="credential-count"></span>
@@ -62,7 +102,7 @@
           </div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" id="routes" data-ai-section="connector-routes">
           <div class="panel-head">
             <h2>Connector Routes</h2>
             <span id="route-count"></span>
@@ -72,7 +112,7 @@
           </div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" id="refs" data-ai-section="credential-detail">
           <div class="panel-head">
             <h2>Credential Ref Detail</h2>
             <span id="credential-detail-count"></span>
@@ -82,7 +122,7 @@
           </div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" id="automations" data-ai-section="n8n-workflows">
           <div class="panel-head">
             <h2>n8n Workflows</h2>
             <span id="n8n-count"></span>
@@ -92,7 +132,7 @@
           </div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" data-ai-section="ghl-browser-pages">
           <div class="panel-head">
             <h2>GHL Browser Pages</h2>
             <span id="ghl-page-count"></span>
@@ -102,7 +142,7 @@
           </div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" data-ai-section="prosper-main-users">
           <div class="panel-head">
             <h2>PROSPER MAIN Users + Numbers</h2>
             <span id="prosper-main-count"></span>
@@ -119,7 +159,7 @@
           </div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" data-ai-section="make-map">
           <div class="panel-head">
             <h2>Make.com</h2>
             <span id="make-count"></span>
@@ -138,7 +178,7 @@
           <div class="table-wrap"><table id="make-connections"></table></div>
         </article>
 
-        <article class="panel wide">
+        <article class="panel wide" id="phones" data-ai-section="telnyx-map">
           <div class="panel-head">
             <h2>Telnyx</h2>
             <span id="telnyx-count"></span>

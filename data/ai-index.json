@@ -1,0 +1,210 @@
+{
+  "title": "Prosper Shield GHL Live Map",
+  "generatedAt": "2026-06-15T18:58:58.168Z",
+  "sourceGeneratedAt": "2026-06-15T01:09:32.083Z",
+  "canonicalUrl": "https://ghl.prospershield.io",
+  "safety": {
+    "rawSecretsPublished": false,
+    "publicDataPolicy": "Token values, passwords, bearer strings, webhook URLs, and credential material are intentionally not present. Use credential ref names and validation status only.",
+    "noCustomerSends": true,
+    "noSmsFallback": true,
+    "noPublicPosts": true
+  },
+  "summary": {
+    "subAccounts": 12,
+    "contacts": 121396,
+    "opportunities": 19659,
+    "credentialSystems": 16,
+    "credentialRefs": 248,
+    "credentialDetails": 248,
+    "connectionRoutes": 16,
+    "n8nWorkflows": 16,
+    "makeScenarios": 10,
+    "telnyxPhoneNumbers": 14
+  },
+  "sections": [
+    {
+      "id": "operator-start",
+      "title": "Start Here",
+      "description": "Plain-English overview for non-technical users.",
+      "rows": 6,
+      "keywords": [
+        "overview",
+        "plain english",
+        "what is this",
+        "start"
+      ]
+    },
+    {
+      "id": "ghl-subaccounts",
+      "title": "GHL Subaccounts",
+      "description": "Subaccount names, IDs, last login, active/stale/dormant status, lead counts, opportunity counts, visible phone, and phone risk status.",
+      "rows": 12,
+      "keywords": [
+        "accounts",
+        "leads",
+        "last login",
+        "owner",
+        "opportunities",
+        "active",
+        "stale",
+        "dormant"
+      ]
+    },
+    {
+      "id": "credential-systems",
+      "title": "Credential Systems",
+      "description": "One row per connector system with credential refs, connector purpose, live auth status, and login notes.",
+      "rows": 16,
+      "keywords": [
+        "credentials",
+        "tokens",
+        "logins",
+        "auth",
+        "connectors",
+        "status"
+      ]
+    },
+    {
+      "id": "connector-routes",
+      "title": "Connector Routes",
+      "description": "How systems connect to each other: GHL, Make, n8n, Telnyx, Supabase, GitHub, Netlify, Cloudflare, Monday, Gemini, Redis, 1Password, Setmore, SignNow.",
+      "rows": 16,
+      "keywords": [
+        "routes",
+        "integration map",
+        "flow",
+        "connectors",
+        "source",
+        "target"
+      ]
+    },
+    {
+      "id": "credential-detail",
+      "title": "Credential Ref Detail",
+      "description": "One row per credential ref with system, kind, set state, validation, public handling, role, and route. Values are redacted.",
+      "rows": 248,
+      "keywords": [
+        "env",
+        "variable",
+        "credential ref",
+        "token name",
+        "secret ref"
+      ]
+    },
+    {
+      "id": "n8n-workflows",
+      "title": "n8n Workflows",
+      "description": "n8n workflow names, active state, update time, node count, webhook paths, and integrations.",
+      "rows": 16,
+      "keywords": [
+        "n8n",
+        "workflow",
+        "webhook",
+        "Hanna",
+        "Telnyx",
+        "GHL"
+      ]
+    },
+    {
+      "id": "make-map",
+      "title": "Make.com",
+      "description": "Make scenarios, webhooks, and connections used for GHL/Monday/install/quote/publish flows.",
+      "rows": 33,
+      "keywords": [
+        "Make",
+        "scenario",
+        "hook",
+        "connection",
+        "Monday",
+        "GHL"
+      ]
+    },
+    {
+      "id": "telnyx-map",
+      "title": "Telnyx",
+      "description": "Telnyx phone numbers, messaging profiles, voice/SIP connections, FQDNs, and outbound voice profiles.",
+      "rows": 30,
+      "keywords": [
+        "Telnyx",
+        "phone",
+        "SMS",
+        "voice",
+        "SIP",
+        "LiveKit",
+        "Assistable"
+      ]
+    }
+  ],
+  "actionItems": [
+    {
+      "type": "phone-risk",
+      "title": "A2P incomplete or failed",
+      "detail": "Andrew Brown, Daniel Tirri, Jeff Restel, and Scott show incomplete/failed A2P 10DLC in the GHL phone system."
+    },
+    {
+      "type": "phone-risk",
+      "title": "Needs phone configuration",
+      "detail": "Cole Stallard, Garett Eackelbary, Junnie, and Sandbox require phone-system configuration from the GHL phone screens."
+    },
+    {
+      "type": "phone-risk",
+      "title": "No Data despite LC Phone card",
+      "detail": "Danny and Nelson Mousques have LC Phone managed indicators but the Phone System page rendered No Data."
+    },
+    {
+      "type": "phone-risk",
+      "title": "Outbound send freeze",
+      "detail": "Prosper policy/memory says no customer sends, SMS fallback, or public social blast should be fired without Craig's explicit go."
+    },
+    {
+      "type": "credential-status",
+      "title": "Setmore: needs-reauth",
+      "detail": "SETMORE_API_KEY is present but the tested services endpoint returned HTTP 401."
+    },
+    {
+      "type": "credential-status",
+      "title": "Assistable / Voice AI: present-not-tested",
+      "detail": "Assistable refs exist and connect to voice/AI call paths through Telnyx/n8n."
+    },
+    {
+      "type": "credential-status",
+      "title": "Other Prosper AI/vendor keys: present-not-tested",
+      "detail": "Refs are present in the Prosper env registry. They are not core to the GHL live map and were not exercised in this run."
+    },
+    {
+      "type": "access-limit",
+      "title": "HighLevel API scope",
+      "detail": "PROSPER MAIN is readable deeply by API; non-main subaccounts rely on browser inventory for full detail until agency scope is repaired."
+    }
+  ],
+  "queryExamples": [
+    "Which systems need reauth?",
+    "Show all GHL credential refs and what they route into.",
+    "Which subaccounts are dormant?",
+    "Which phone numbers are tied to Telnyx Reactivation Engine?",
+    "What connects Make.com to GHL?",
+    "Which n8n workflows are active?",
+    "What is safe to publish and what is redacted?"
+  ],
+  "sourceFiles": {
+    "fullData": "https://ghl.prospershield.io/data/ghl-live-map.json",
+    "aiIndex": "https://ghl.prospershield.io/data/ai-index.json",
+    "markdownReport": "https://ghl.prospershield.io/docs/GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md",
+    "githubRepo": "https://github.com/prosperenergy/ghl-prospershield",
+    "githubWikiSource": "https://github.com/prosperenergy/ghl-prospershield/tree/main/wiki"
+  },
+  "schemaHints": {
+    "accounts": "data.accounts[]",
+    "credentialSystems": "data.credentialMap.systems[]",
+    "connectorRoutes": "data.credentialMap.routes[]",
+    "credentialDetails": "data.credentialMap.details[]",
+    "n8nWorkflows": "data.n8n.workflows[]",
+    "makeScenarios": "data.make.scenarios[]",
+    "makeHooks": "data.make.hooks[]",
+    "makeConnections": "data.make.connections[]",
+    "telnyxPhoneNumbers": "data.telnyx.phoneNumbers[]",
+    "telnyxMessagingProfiles": "data.telnyx.messagingProfiles[]",
+    "telnyxConnections": "data.telnyx.connections[]"
+  }
+}

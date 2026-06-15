@@ -2,6 +2,8 @@ const state = {
   data: null,
   query: "",
   filter: "all",
+  quickQuery: "",
+  theme: localStorage.getItem("ghl-theme") || "light",
 };
 
 const fmt = new Intl.NumberFormat("en-US");
@@ -13,12 +15,28 @@ function textMatches(value, q) {
 }
 
 function rowsFor(items) {
-  if (!state.query) return items;
-  return items.filter((item) => textMatches(item, state.query));
+  const q = state.query || state.quickQuery;
+  if (!q) return items;
+  return items.filter((item) => textMatches(item, q));
 }
 
 function statusClass(status) {
   return `status-${String(status || "").toLowerCase()}`;
+}
+
+function setTheme(theme) {
+  state.theme = theme;
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("ghl-theme", theme);
+  $("theme-toggle").textContent = theme === "dark" ? "Light" : "Dark";
+  $("theme-toggle").setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} mode`);
+}
+
+function setSearch(query) {
+  state.quickQuery = query;
+  $("search").value = query;
+  state.query = query;
+  render();
 }
 
 function renderTable(el, headers, rows) {
@@ -41,6 +59,78 @@ function renderKpis(data) {
   $("kpis").innerHTML = kpis
     .map(([label, value]) => `<div class="kpi"><strong>${fmt.format(value)}</strong><span>${label}</span></div>`)
     .join("");
+}
+
+function renderPlainSummary(data) {
+  const cards = [
+    {
+      title: "CRM Accounts",
+      detail: `${fmt.format(data.totals.subAccounts)} GHL subaccounts hold ${fmt.format(data.totals.contacts)} visible contacts/leads and ${fmt.format(data.totals.opportunities)} visible opportunities.`,
+    },
+    {
+      title: "Main Working Account",
+      detail: `PROSPER MAIN is the active center: ${fmt.format(data.accounts.find((account) => account.name === "PROSPER MAIN")?.contacts || 0)} contacts, 47 users, and 15 GHL phone assignments.`,
+    },
+    {
+      title: "Automation Layer",
+      detail: `Make and n8n connect GHL to Monday, Telnyx, Hanna voice, quote intake, post-call sync, and lead-response routes.`,
+    },
+    {
+      title: "Phone Layer",
+      detail: `Telnyx has ${fmt.format(data.totals.telnyxPhoneNumbers)} numbers, ${fmt.format(data.totals.telnyxMessagingProfiles)} messaging profiles, and ${fmt.format(data.totals.telnyxConnections)} voice/SIP connections.`,
+    },
+    {
+      title: "Credential Map",
+      detail: `${fmt.format(data.totals.credentialRefs)} credential references are mapped by role and route. Secret values are not published.`,
+    },
+    {
+      title: "Public Knowledge",
+      detail: "GitHub, Supabase, Netlify, and Cloudflare publish this read-only map at ghl.prospershield.io.",
+    },
+  ];
+  $("plain-summary").innerHTML = cards
+    .map((card) => `<div class="plain-card"><strong>${card.title}</strong><p>${card.detail}</p></div>`)
+    .join("");
+}
+
+function renderAttention(data) {
+  const attention = [
+    ...data.phoneRisks.map((risk) => ({ title: risk.title, detail: risk.detail })),
+    ...data.credentialMap.systems
+      .filter((system) => !["validated", "validated-service-account", "validated-auth-endpoint"].includes(system.validation))
+      .map((system) => ({ title: `${system.system}: ${system.validation}`, detail: system.loginStatus })),
+    {
+      title: "HighLevel API scope",
+      detail: "PROSPER MAIN is readable deeply by API; non-main subaccounts still rely on browser inventory for full detail.",
+    },
+  ];
+  const rows = rowsFor(attention);
+  $("attention-count").textContent = `${rows.length} visible`;
+  $("attention-list").innerHTML = rows
+    .map((item) => `<button class="item action-item" type="button" data-search="${item.title.split(":")[0]}"><strong>${item.title}</strong><p>${item.detail}</p></button>`)
+    .join("");
+  $("attention-list").querySelectorAll("[data-search]").forEach((button) => {
+    button.addEventListener("click", () => setSearch(button.dataset.search));
+  });
+}
+
+function renderGlossary(data) {
+  const glossary = [
+    ["GHL", "The CRM. It stores subaccounts, leads, opportunities, users, phone assignments, workflows, social planner, and contact records."],
+    ["Make.com", "The automation bridge. It moves work between GHL, Monday, quote intake, install projects, GitHub, Netlify, Google/Gemini, and SignNow."],
+    ["n8n", "The webhook/workflow layer. It handles Telnyx inbound routes, Hanna voice paths, post-call sync, retry jobs, and GHL call triggers."],
+    ["Telnyx", "The phone/SMS/voice provider. It owns the numbers, messaging profiles, SIP/LiveKit/Assistable connections, and voice profiles."],
+    ["Supabase", "The private knowledge store. This report is also written to the Prosper knowledge base and activity log."],
+    ["GitHub + Netlify + Cloudflare", "The public publishing path. GitHub stores source, Netlify hosts, Cloudflare routes the domain."],
+    ["Credential ref", "A variable name that points to a token, endpoint, object id, phone number, user, board, or connector setting. Values are redacted."],
+  ];
+  const rows = rowsFor(glossary.map(([title, detail]) => ({ title, detail })));
+  $("glossary-list").innerHTML = rows
+    .map((item) => `<button class="item action-item" type="button" data-search="${item.title}"><strong>${item.title}</strong><p>${item.detail}</p></button>`)
+    .join("");
+  $("glossary-list").querySelectorAll("[data-search]").forEach((button) => {
+    button.addEventListener("click", () => setSearch(button.dataset.search));
+  });
 }
 
 function renderAccounts(data) {
@@ -202,20 +292,54 @@ function renderTelnyx(data) {
 
 function renderChips() {
   const chips = [
-    ["all", "All"],
-    ["active", "Active"],
-    ["stale", "Stale"],
-    ["dormant", "Dormant"],
+    { type: "filter", id: "all", label: "All" },
+    { type: "filter", id: "active", label: "Active accounts" },
+    { type: "filter", id: "stale", label: "Stale accounts" },
+    { type: "filter", id: "dormant", label: "Dormant accounts" },
+    { type: "query", id: "needs", label: "Needs action" },
+    { type: "query", id: "validated", label: "Validated" },
+    { type: "query", id: "GHL", label: "GHL" },
+    { type: "query", id: "Telnyx", label: "Phones" },
+    { type: "query", id: "Make", label: "Make" },
+    { type: "query", id: "n8n", label: "n8n" },
+    { type: "query", id: "Setmore", label: "Setmore" },
   ];
   $("chips").innerHTML = chips
-    .map(([id, label]) => `<button class="chip ${state.filter === id ? "active" : ""}" data-filter="${id}">${label}</button>`)
+    .map((chip) => {
+      const isActive = chip.type === "filter" ? state.filter === chip.id && !state.query : state.query === chip.id;
+      return `<button class="chip ${isActive ? "active" : ""}" data-${chip.type}="${chip.id}">${chip.label}</button>`;
+    })
     .join("");
   document.querySelectorAll("[data-filter]").forEach((button) => {
     button.addEventListener("click", () => {
       state.filter = button.dataset.filter;
+      state.query = "";
+      state.quickQuery = "";
+      $("search").value = "";
       render();
     });
   });
+  document.querySelectorAll("[data-query]").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.filter = "all";
+      setSearch(button.dataset.query);
+      render();
+    });
+  });
+}
+
+function renderSearchStatus(data) {
+  const q = state.query || state.quickQuery;
+  const counts = {
+    accounts: rowsFor(data.accounts).length,
+    systems: rowsFor(data.credentialMap.systems || []).length,
+    routes: rowsFor(data.credentialMap.routes || []).length,
+    refs: rowsFor(data.credentialMap.details || []).length,
+    workflows: rowsFor(data.n8n.workflows || []).length,
+    telnyx: rowsFor(data.telnyx.phoneNumbers || []).length,
+  };
+  const label = q ? `Showing matches for "${q}"` : "Showing full map";
+  $("search-status").textContent = `${label}: ${counts.accounts} accounts, ${counts.systems} credential systems, ${counts.routes} routes, ${counts.refs} refs, ${counts.workflows} workflows, ${counts.telnyx} phone numbers.`;
 }
 
 function render() {
@@ -223,6 +347,10 @@ function render() {
   $("updated").textContent = `Updated ${data.generatedAt}`;
   renderChips();
   renderKpis(data);
+  renderPlainSummary(data);
+  renderAttention(data);
+  renderGlossary(data);
+  renderSearchStatus(data);
   renderAccounts(data);
   renderCards(data);
   renderCredentials(data);
@@ -239,8 +367,12 @@ fetch("./data/ghl-live-map.json")
   .then((res) => res.json())
   .then((data) => {
     state.data = data;
+    setTheme(state.theme);
+    $("theme-toggle").addEventListener("click", () => setTheme(state.theme === "dark" ? "light" : "dark"));
     $("search").addEventListener("input", (event) => {
       state.query = event.target.value.trim();
+      state.quickQuery = state.query;
+      state.filter = "all";
       render();
     });
     render();

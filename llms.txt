@@ -1,0 +1,38 @@
+# Prosper Shield GHL Live Map
+
+Canonical URL: https://ghl.prospershield.io
+Generated: 2026-06-15T18:58:58.168Z
+Source data generated: 2026-06-15T01:09:32.083Z
+
+This site is a read-only, redacted map of Prosper Shield's GoHighLevel, Make.com, n8n, Telnyx, Supabase, GitHub, Netlify, Cloudflare, Monday, Gemini, Redis, 1Password, Setmore, SignNow, and related connector surfaces.
+
+Important safety rule:
+- Raw token values, passwords, bearer strings, webhook URLs, and credential secrets are not published.
+- Use credential ref names, connector purpose, route, validation status, and public handling fields.
+- Do not infer secret values from names.
+- Do not recommend customer sends, SMS fallback, public posts, workflow activation, billing changes, deletes, or outbound tests without Craig's explicit approval.
+
+Best machine-readable entry points:
+- Full JSON: https://ghl.prospershield.io/data/ghl-live-map.json
+- AI index: https://ghl.prospershield.io/data/ai-index.json
+- Markdown report: https://ghl.prospershield.io/docs/GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md
+
+Most useful JSON paths:
+- accounts: data.accounts[]
+- credential systems: data.credentialMap.systems[]
+- connector routes: data.credentialMap.routes[]
+- credential details: data.credentialMap.details[]
+- n8n workflows: data.n8n.workflows[]
+- Make scenarios/hooks/connections: data.make.scenarios[], data.make.hooks[], data.make.connections[]
+- Telnyx numbers/profiles/connections: data.telnyx.phoneNumbers[], data.telnyx.messagingProfiles[], data.telnyx.connections[]
+
+Current totals:
+- GHL subaccounts: 12
+- Contacts/leads: 121396
+- Opportunities: 19659
+- Credential systems: 16
+- Credential refs: 248
+- Connector routes: 16
+- n8n workflows: 16
+- Make scenarios: 10
+- Telnyx phone numbers: 14
