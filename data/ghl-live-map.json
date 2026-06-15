@@ -1,0 +1,1624 @@
+{
+  "generatedAt": "2026-06-15T00:40:17.348Z",
+  "mode": "read-only live inventory",
+  "safety": {
+    "noCustomerSends": true,
+    "noSmsFallback": true,
+    "noPublicPosts": true,
+    "telnyxTermInRequest": "User said Telmex; inventory mapped the available Prosper Telnyx system."
+  },
+  "sources": [
+    "Live Prosper/HighLevel browser session",
+    "Local HighLevel API for PROSPER MAIN",
+    "Make.com API",
+    "n8n API",
+    "Telnyx API",
+    "Prosper env connection registry with secrets redacted"
+  ],
+  "accessLimits": [
+    "HighLevel connector/API scope cannot yet read every subaccount deeply by API.",
+    "1Password CLI was present but not signed in in this shell.",
+    "Agency browser routes supplied counts, last-login, and phone status for non-main locations.",
+    "Telnyx brand and 10DLC campaign probes returned Telnyx 10005 resource-not-found on the tested endpoints, while env still contains brand/campaign identifiers."
+  ],
+  "totals": {
+    "subAccounts": 12,
+    "contacts": 121396,
+    "opportunities": 19659,
+    "activeAccounts": 4,
+    "staleAccounts": 4,
+    "dormantAccounts": 4,
+    "prosperMainUsers": 47,
+    "prosperMainAdmins": 19,
+    "prosperMainAccountUsers": 39,
+    "prosperMainAgencyUsers": 8,
+    "n8nWorkflows": 16,
+    "n8nActiveWorkflows": 7,
+    "makeScenarios": 10,
+    "makeHooks": 10,
+    "makeConnections": 13,
+    "telnyxPhoneNumbers": 14,
+    "telnyxMessagingProfiles": 8,
+    "telnyxConnections": 8,
+    "telnyxVerifiedNumbers": 0
+  },
+  "accounts": [
+    {
+      "name": "Andrew Brown",
+      "id": "rQxheT1tQDRnAsPwx4my",
+      "address": "15780 Jansen road",
+      "visiblePhone": "+14344430305",
+      "dateAdded": "2026-02-27",
+      "lastLogin": "2026-03-11",
+      "activity": "Stale",
+      "contacts": 959,
+      "opportunities": 956,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "2 phone numbers; A2P 10DLC incomplete/failed"
+    },
+    {
+      "name": "Cole Stallard",
+      "id": "S2HIAZD4LdIdHsm1hnYZ",
+      "address": "11900 Alor Ct",
+      "visiblePhone": "+1 803-556-7450",
+      "dateAdded": "2026-01-20",
+      "lastLogin": "2026-06-09",
+      "activity": "Active",
+      "contacts": 9551,
+      "opportunities": 4301,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Not managed by LC Phone",
+      "phoneStatus": "Requires phone system configuration; header showed CRM Phone Pro number +17029726492"
+    },
+    {
+      "name": "Daniel Tirri",
+      "id": "uvn2fEzSON9SJ5Tvl58W",
+      "address": "11900 alor court",
+      "visiblePhone": "+18439994606",
+      "dateAdded": "2026-02-27",
+      "lastLogin": "2026-03-21",
+      "activity": "Stale",
+      "contacts": 962,
+      "opportunities": 958,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "2 phone numbers; A2P 10DLC incomplete/failed"
+    },
+    {
+      "name": "Danny",
+      "id": "l8LZRLuH4byt1cvfUMND",
+      "address": "11900 Alor Ct",
+      "visiblePhone": "+18035567450",
+      "dateAdded": "2026-02-26",
+      "lastLogin": "2026-04-09",
+      "activity": "Stale",
+      "contacts": 957,
+      "opportunities": 957,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "Phone System page showed No Data"
+    },
+    {
+      "name": "Garett Eackelbary",
+      "id": "PMX06M3dloyKTN3WCCun",
+      "address": "3794 Troon Dr",
+      "visiblePhone": "+13303293748",
+      "dateAdded": "2025-09-02",
+      "lastLogin": "2026-06-09",
+      "activity": "Active",
+      "contacts": 9180,
+      "opportunities": 1,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Not managed by LC Phone",
+      "phoneStatus": "Requires phone system configuration"
+    },
+    {
+      "name": "Jeff Restel",
+      "id": "ndKcgKpYa3UPmznS6ao1",
+      "address": "1240 Winnowing Way",
+      "visiblePhone": "+18035567450",
+      "dateAdded": "2025-07-29",
+      "lastLogin": "N/A",
+      "activity": "Dormant",
+      "contacts": 6146,
+      "opportunities": 0,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "1 phone number; A2P 10DLC incomplete/failed"
+    },
+    {
+      "name": "Junnie",
+      "id": "6QlWtYKs2UtwvqwoNlVQ",
+      "address": "11900 Alor Ct",
+      "visiblePhone": "+1 877 317 9079",
+      "dateAdded": "2026-01-20",
+      "lastLogin": "N/A",
+      "activity": "Dormant",
+      "contacts": 366,
+      "opportunities": 0,
+      "lcEmail": "Not visible in extracted row",
+      "lcPhone": "Not visible in extracted row",
+      "phoneStatus": "Requires phone system configuration"
+    },
+    {
+      "name": "Nelson Mousques",
+      "id": "liBBSRKm6JNuGoSkvQ1G",
+      "address": "1240 Winnowing Way",
+      "visiblePhone": "+1 803-556-7450",
+      "dateAdded": "2026-06-08",
+      "lastLogin": "2026-06-08",
+      "activity": "Active",
+      "contacts": 5,
+      "opportunities": 2,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "Phone System page showed No Data"
+    },
+    {
+      "name": "PROSPER MAIN",
+      "id": "hU3tflAFRrVsoETFstfk",
+      "address": "1240 Winnowing Way",
+      "visiblePhone": "+18035567450",
+      "dateAdded": "2025-02-12",
+      "lastLogin": "2026-06-13",
+      "activity": "Active",
+      "contacts": 92284,
+      "opportunities": 11527,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Agency card says Not managed by LC Phone",
+      "phoneStatus": "API says LC phone active/under LC; A2P compliant; 15 phone numbers"
+    },
+    {
+      "name": "Prosper Team",
+      "id": "LW80mjJWwCPe8dFINhG0",
+      "address": "11900 Alor Ct",
+      "visiblePhone": "7073958984",
+      "dateAdded": "2026-02-03",
+      "lastLogin": "N/A",
+      "activity": "Dormant",
+      "contacts": 15,
+      "opportunities": null,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "1 phone number"
+    },
+    {
+      "name": "Sandbox",
+      "id": "zix3Qq3kD0tG9NmDgNs2",
+      "address": "not visible",
+      "visiblePhone": "+13049028155",
+      "dateAdded": "2025-03-14",
+      "lastLogin": "2025-06-30",
+      "activity": "Dormant",
+      "contacts": 2,
+      "opportunities": null,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Not managed by LC Phone",
+      "phoneStatus": "Requires phone system configuration"
+    },
+    {
+      "name": "Scott",
+      "id": "OxVnVhXGUiZQ4bBFcCdf",
+      "address": "11900 Alor Ct",
+      "visiblePhone": "8035567450",
+      "dateAdded": "2026-02-26",
+      "lastLogin": "2026-03-08",
+      "activity": "Stale",
+      "contacts": 969,
+      "opportunities": 957,
+      "lcEmail": "Managed by LC Email",
+      "lcPhone": "Managed by LC Phone",
+      "phoneStatus": "1 phone number; A2P 10DLC incomplete/failed"
+    }
+  ],
+  "prosperMain": {
+    "users": [
+      "Abdourahamane Diallo",
+      "Abidemi Mary Adebayo",
+      "Akpaka Kenechukwu sandra",
+      "Amber Gant",
+      "Andy Herrmann",
+      "avi prosper",
+      "Brian Job",
+      "Chidinma Akpati",
+      "Cole Stallard",
+      "Collins Situma",
+      "Craig Stratton",
+      "Danny Laveaga",
+      "Elijah Sutton",
+      "Garett Eackelbary",
+      "Geoffrey Morris",
+      "Hanna a210code",
+      "Hanna a571areacode",
+      "Hanna a857areacode",
+      "Hanna Ai",
+      "Hanna area540code",
+      "Hanna Code202",
+      "Hanna Hanna304",
+      "Hanna Prosper",
+      "Hanna ProspershieldDOTio Ai",
+      "Hanna z803",
+      "Hanna zzz803",
+      "Hashim Sarfraz",
+      "Ibukun Akinsiku",
+      "Julie Iyamba",
+      "Kishorna Loftman",
+      "Laura Steepleton",
+      "Mike Von Rupp",
+      "Miranda Chepkorir",
+      "Monty Campbell",
+      "Nelson Mousques",
+      "Nurjehaan Schroeder",
+      "Olatoyan David",
+      "Otto Zelaya",
+      "PSO E2E Test 1772929336",
+      "PSO UI E2E 1772929405",
+      "Ricky Lelito",
+      "Ricky R",
+      "Sara Ai",
+      "Scott Crumb",
+      "Sodiq Oreoluwa",
+      "Victor Nyachae",
+      "Zackary Jackson"
+    ],
+    "phoneAssignments": [
+      {
+        "number": "+14104987548",
+        "friendlyName": "Brian Job",
+        "type": "local",
+        "linkedUser": "Brian Job",
+        "forwarding": "",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+15405834155",
+        "friendlyName": "Julie Iyamba",
+        "type": "local",
+        "linkedUser": "Julie Iyamba",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+13092457451",
+        "friendlyName": "Abid Mary Adebayo",
+        "type": "local",
+        "linkedUser": "Abidemi Mary Adebayo",
+        "forwarding": "",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+13049028155",
+        "friendlyName": "Abdourahamane Diallo",
+        "type": "local",
+        "linkedUser": "Abdourahamane Diallo",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+15714548627",
+        "friendlyName": "Kishorna Loftman",
+        "type": "local",
+        "linkedUser": "Kishorna Loftman",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+12109421906",
+        "friendlyName": "210areacode hanna",
+        "type": "local",
+        "linkedUser": "Hanna a210code",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+18035734080",
+        "friendlyName": "Nurjehaan Schroeder",
+        "type": "local",
+        "linkedUser": "Nurjehaan Schroeder",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+18575988373",
+        "friendlyName": "Otto Zelaya",
+        "type": "local",
+        "linkedUser": "Otto Zelaya",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+13368495577",
+        "friendlyName": "Ibukun Akinsiku",
+        "type": "local",
+        "linkedUser": "Ibukun Akinsiku",
+        "forwarding": "",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+13017012389",
+        "friendlyName": "Akpaka Kenechukwu sandra",
+        "type": "local",
+        "linkedUser": "Akpaka Kenechukwu sandra",
+        "forwarding": "",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+13098619729",
+        "friendlyName": "Chidinma Akpati",
+        "type": "local",
+        "linkedUser": "Chidinma Akpati",
+        "forwarding": "",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+18038642641",
+        "friendlyName": "Olatoyan David",
+        "type": "local",
+        "linkedUser": "Olatoyan David",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+19803516111",
+        "friendlyName": "Sodiq Oreoluwa",
+        "type": "local",
+        "linkedUser": "Sodiq Oreoluwa",
+        "forwarding": "",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+12029727938",
+        "friendlyName": "Notifications Only",
+        "type": "local",
+        "linkedUser": "Hanna Code202",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      },
+      {
+        "number": "+18773179079",
+        "friendlyName": "HANNA - Prosper AI",
+        "type": "tollFree",
+        "linkedUser": "Hanna ProspershieldDOTio Ai",
+        "forwarding": "+13049371183",
+        "capabilities": "voice/sms/mms"
+      }
+    ]
+  },
+  "phoneRisks": [
+    {
+      "title": "A2P incomplete or failed",
+      "detail": "Andrew Brown, Daniel Tirri, Jeff Restel, and Scott show incomplete/failed A2P 10DLC in the GHL phone system."
+    },
+    {
+      "title": "Needs phone configuration",
+      "detail": "Cole Stallard, Garett Eackelbary, Junnie, and Sandbox require phone-system configuration from the GHL phone screens."
+    },
+    {
+      "title": "No Data despite LC Phone card",
+      "detail": "Danny and Nelson Mousques have LC Phone managed indicators but the Phone System page rendered No Data."
+    },
+    {
+      "title": "Outbound send freeze",
+      "detail": "Prosper policy/memory says no customer sends, SMS fallback, or public social blast should be fired without Craig's explicit go."
+    }
+  ],
+  "integrationSummary": [
+    {
+      "title": "GHL account surface",
+      "detail": "12 subaccounts; 121,396 visible contacts/leads; 19,659 visible opportunities; PROSPER MAIN is the active center with 92,284 contacts and 11,527 opportunities."
+    },
+    {
+      "title": "GHL API coverage",
+      "detail": "Local token reads PROSPER MAIN deeply, including 47 users and 15 phone assignments. Other locations required the live browser session because agency-scoped API access is still restricted."
+    },
+    {
+      "title": "Make.com",
+      "detail": "10 scenarios, 10 enabled hooks, and 13 connections. Visible connections include GHL v2, Prosper Main, Monday, GitHub, Netlify, Gmail, Google Drive, Gemini, NVIDIA, SignNow, and Make."
+    },
+    {
+      "title": "n8n",
+      "detail": "16 workflows found; 6 active. Active paths include GHL outbound AI call to Assistable, Hanna voice, Hanna post-call sync, Maddi intake gates, PRO-1 retry, Telnyx inbound handler, and Telnyx inbound to GHL."
+    },
+    {
+      "title": "Telnyx",
+      "detail": "14 active phone numbers, 8 messaging profiles, 8 voice/SIP connections, 3 outbound voice profiles, 2 FQDN rows, and 0 verified numbers returned by the verified-numbers API."
+    },
+    {
+      "title": "Social planner",
+      "detail": "Browser capture shows GHL Social Planner is present with socials/settings; environment exposes an account map for Facebook, Instagram, LinkedIn, and TikTok. No public posts were sent."
+    }
+  ],
+  "ghlBrowserPages": [
+    {
+      "page": "All Integrations",
+      "signal": "42 Connect labels, 1 Connected, Google Calendar visible, plus Private Integrations, Conversation Providers, and Workflows entry points."
+    },
+    {
+      "page": "Private Integrations",
+      "signal": "API v2.0 page captured but rows did not render clearly in text extraction."
+    },
+    {
+      "page": "Conversation Providers",
+      "signal": "Page header captured but detailed providers did not render in text extraction."
+    },
+    {
+      "page": "App Marketplace",
+      "signal": "Marketplace Apps, Installed Apps, Settings, AI Agents, Support Tickets, and Templates visible."
+    },
+    {
+      "page": "Social Planner",
+      "signal": "Planner, Content, Comments, Statistics, Social Listening, Settings, and Socials visible."
+    },
+    {
+      "page": "Workflows",
+      "signal": "Automation Workflows, Overview Beta, and Global Workflow Settings visible."
+    }
+  ],
+  "n8n": {
+    "workflows": [
+      {
+        "id": "uwqbIviaXq8hhIJb",
+        "name": "Cold Engine — 5-touch cadence",
+        "active": false,
+        "updatedAt": "2026-05-03T02:20:26.908Z",
+        "createdAt": "2026-05-03T02:20:26.908Z",
+        "tags": [],
+        "nodeCount": 6,
+        "webhookPaths": [],
+        "integrations": [
+          "httpRequest",
+          "scheduleTrigger",
+          "set",
+          "splitOut"
+        ]
+      },
+      {
+        "id": "4AExrwQZtZxuQ7Aq",
+        "name": "GHL Outbound AI Call → Assistable",
+        "active": true,
+        "updatedAt": "2026-04-24T02:28:36.156Z",
+        "createdAt": "2026-04-15T02:22:13.306Z",
+        "tags": [],
+        "nodeCount": 5,
+        "webhookPaths": [
+          {
+            "name": "GHL Call Trigger",
+            "type": "n8n-nodes-base.webhook",
+            "path": "ghl-outbound-call",
+            "method": "POST"
+          },
+          {
+            "name": "Respond OK",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "respondToWebhook",
+          "webhook"
+        ]
+      },
+      {
+        "id": "3mzqfwFq4T2Aufpg",
+        "name": "Hanna AI — SMS Handler (Gemini)",
+        "active": false,
+        "updatedAt": "2026-04-21T19:20:00.985Z",
+        "createdAt": "2026-04-21T19:20:00.985Z",
+        "tags": [],
+        "nodeCount": 9,
+        "webhookPaths": [
+          {
+            "name": "Inbound SMS Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "path": "hanna-ai-sms",
+            "method": "POST"
+          },
+          {
+            "name": "Respond 200 OK",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "respondToWebhook",
+          "webhook"
+        ]
+      },
+      {
+        "id": "TIXj7oDQvMHghUZf",
+        "name": "Hanna AI — SMS Poller (Gemini)",
+        "active": false,
+        "updatedAt": "2026-04-21T19:29:15.679Z",
+        "createdAt": "2026-04-21T19:29:15.679Z",
+        "tags": [],
+        "nodeCount": 6,
+        "webhookPaths": [],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "scheduleTrigger"
+        ]
+      },
+      {
+        "id": "ZmpJjUWDzMebjdXY",
+        "name": "Hanna AI — SMS Poller v2 (Gemini)",
+        "active": false,
+        "updatedAt": "2026-04-24T02:32:31.780Z",
+        "createdAt": "2026-04-21T19:33:05.882Z",
+        "tags": [],
+        "nodeCount": 9,
+        "webhookPaths": [],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "scheduleTrigger"
+        ]
+      },
+      {
+        "id": "Gorkda74nEEmc0pH",
+        "name": "Hanna AI — Voice Agent (Telnyx + Gemini)",
+        "active": true,
+        "updatedAt": "2026-04-24T02:40:05.926Z",
+        "createdAt": "2026-04-21T20:07:56.578Z",
+        "tags": [],
+        "nodeCount": 11,
+        "webhookPaths": [
+          {
+            "name": "Telnyx Voice Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "path": "hanna-voice-ai",
+            "method": "POST"
+          },
+          {
+            "name": "Respond 200 OK",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "if",
+          "respondToWebhook",
+          "switch",
+          "webhook"
+        ]
+      },
+      {
+        "id": "vZCgYuzHFKP28CyH",
+        "name": "Hanna Post-Call Sync",
+        "active": true,
+        "updatedAt": "2026-04-07T23:10:00.477Z",
+        "createdAt": "2026-04-03T02:16:08.488Z",
+        "tags": [],
+        "nodeCount": 33,
+        "webhookPaths": [
+          {
+            "name": "Receive Post-Call Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "path": "hanna/post-call",
+            "method": "POST"
+          }
+        ],
+        "integrations": [
+          "code",
+          "emailSend",
+          "httpRequest",
+          "if",
+          "stickyNote",
+          "wait",
+          "webhook"
+        ]
+      },
+      {
+        "id": "aKgSUAkFQNnPOtdR",
+        "name": "LeadStrike — GHL Contact Webhook Relay",
+        "active": false,
+        "updatedAt": "2026-04-19T03:08:47.346Z",
+        "createdAt": "2026-04-19T03:08:47.346Z",
+        "tags": [],
+        "nodeCount": 2,
+        "webhookPaths": [
+          {
+            "name": "GHL Contact Created",
+            "type": "n8n-nodes-base.webhook",
+            "path": "ghl-contact-created",
+            "method": "POST"
+          }
+        ],
+        "integrations": [
+          "httpRequest",
+          "webhook"
+        ]
+      },
+      {
+        "id": "LWWTJZCb90rNq9aG",
+        "name": "LeadStrike — New GHL Contact Monitor",
+        "active": false,
+        "updatedAt": "2026-04-19T03:09:38.169Z",
+        "createdAt": "2026-04-19T03:09:38.169Z",
+        "tags": [],
+        "nodeCount": 5,
+        "webhookPaths": [],
+        "integrations": [
+          "httpRequest",
+          "if",
+          "scheduleTrigger",
+          "splitOut"
+        ]
+      },
+      {
+        "id": "KlF6mb9tmdjWIQeY",
+        "name": "Maddi Social Auto-Poster — Intake + OAuth Gates",
+        "active": true,
+        "updatedAt": "2026-05-21T15:56:24.367Z",
+        "createdAt": "2026-05-21T15:56:24.367Z",
+        "tags": [],
+        "nodeCount": 5,
+        "webhookPaths": [
+          {
+            "name": "Receive Maddi Publish Request",
+            "type": "n8n-nodes-base.webhook",
+            "path": "maddi/social-auto-poster/intake",
+            "method": "POST"
+          },
+          {
+            "name": "Return Review Packet",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "respondToWebhook",
+          "stickyNote",
+          "webhook"
+        ]
+      },
+      {
+        "id": "ScRcapTwT4idnj9L",
+        "name": "Outbound SMS via Telnyx",
+        "active": false,
+        "updatedAt": "2026-04-15T02:22:37.945Z",
+        "createdAt": "2026-04-15T02:22:37.945Z",
+        "tags": [],
+        "nodeCount": 5,
+        "webhookPaths": [
+          {
+            "name": "Outbound SMS Trigger",
+            "type": "n8n-nodes-base.webhook",
+            "path": "telnyx-outbound-sms",
+            "method": "POST"
+          },
+          {
+            "name": "Respond OK",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "respondToWebhook",
+          "webhook"
+        ]
+      },
+      {
+        "id": "OI9SxQTsFxh78p6H",
+        "name": "PRO-1: Daily Retry — Re-send to Non-Responders",
+        "active": true,
+        "updatedAt": "2026-04-20T21:11:33.897Z",
+        "createdAt": "2026-04-20T20:56:55.071Z",
+        "tags": [],
+        "nodeCount": 6,
+        "webhookPaths": [],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "scheduleTrigger"
+        ]
+      },
+      {
+        "id": "ckoyFUERRfH5vNjn",
+        "name": "PRO-1: Telnyx Inbound SMS → Lead Response Handler",
+        "active": true,
+        "updatedAt": "2026-04-20T21:11:33.388Z",
+        "createdAt": "2026-04-20T20:56:13.573Z",
+        "tags": [],
+        "nodeCount": 8,
+        "webhookPaths": [
+          {
+            "name": "Telnyx Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "path": "telnyx-inbound",
+            "method": "POST"
+          },
+          {
+            "name": "Respond 200",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "if",
+          "respondToWebhook",
+          "webhook"
+        ]
+      },
+      {
+        "id": "wQoB3mR1PQ7nK1E8",
+        "name": "Prosper Social Auto-Poster",
+        "active": false,
+        "updatedAt": "2026-05-21T15:56:43.061Z",
+        "createdAt": "2026-05-21T15:56:43.061Z",
+        "tags": [],
+        "nodeCount": 6,
+        "webhookPaths": [],
+        "integrations": [
+          "httpRequest",
+          "scheduleTrigger",
+          "splitInBatches"
+        ]
+      },
+      {
+        "id": "x6dJUTCML4lVbRcg",
+        "name": "Reactivation — Inbound SMS Handler",
+        "active": false,
+        "updatedAt": "2026-04-20T20:10:35.655Z",
+        "createdAt": "2026-04-20T16:08:02.690Z",
+        "tags": [],
+        "nodeCount": 17,
+        "webhookPaths": [
+          {
+            "name": "Telnyx Inbound Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "path": "reactivation-inbound",
+            "method": "POST"
+          },
+          {
+            "name": "Respond OK",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "if",
+          "respondToWebhook",
+          "webhook"
+        ]
+      },
+      {
+        "id": "L5QjmqbBrdHfKibj",
+        "name": "Telnyx Inbound SMS → GHL",
+        "active": true,
+        "updatedAt": "2026-04-18T20:00:58.953Z",
+        "createdAt": "2026-04-15T02:21:47.056Z",
+        "tags": [],
+        "nodeCount": 8,
+        "webhookPaths": [
+          {
+            "name": "Telnyx SMS Webhook",
+            "type": "n8n-nodes-base.webhook",
+            "path": "telnyx-inbound-sms",
+            "method": "POST"
+          },
+          {
+            "name": "Respond 200",
+            "type": "n8n-nodes-base.respondToWebhook",
+            "path": null,
+            "method": null
+          }
+        ],
+        "integrations": [
+          "code",
+          "httpRequest",
+          "if",
+          "respondToWebhook",
+          "webhook"
+        ]
+      }
+    ]
+  },
+  "make": {
+    "scenarios": [
+      {
+        "id": 5337149,
+        "name": "New Contract -> AI Extract Fields and Update Monday",
+        "isActive": true,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": 100
+        },
+        "created": "2026-06-09T16:47:12.141Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 243775
+      },
+      {
+        "id": 5136889,
+        "name": "Prosper Quote Intake - Internal Proof",
+        "isActive": true,
+        "scheduling": {
+          "type": "immediately"
+        },
+        "created": "2026-05-21T02:48:43.118Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 243775
+      },
+      {
+        "id": 5144384,
+        "name": "create new install Project",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": null
+        },
+        "created": "2026-05-21T18:35:12.607Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 244031
+      },
+      {
+        "id": 5269392,
+        "name": "create new install Project Ecovole",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": 100
+        },
+        "created": "2026-06-02T20:05:37.416Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 249246
+      },
+      {
+        "id": 5144532,
+        "name": "Install Updates",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": null
+        },
+        "created": "2026-05-21T18:48:08.376Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 244031
+      },
+      {
+        "id": 5269398,
+        "name": "Install Updates Ecovole",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": 100
+        },
+        "created": "2026-06-02T20:06:08.144Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 249246
+      },
+      {
+        "id": 5301130,
+        "name": "Integration GoHighLevel",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": 100
+        },
+        "created": "2026-06-05T17:23:47.130Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 243775
+      },
+      {
+        "id": 5327037,
+        "name": "Monday.com -> GHL Sync",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately",
+          "maximum_runs_per_minute": 100
+        },
+        "created": "2026-06-08T18:59:52.321Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 243775
+      },
+      {
+        "id": 5200455,
+        "name": "New scenario",
+        "isActive": null,
+        "scheduling": {
+          "type": "indefinitely",
+          "interval": 900
+        },
+        "created": "2026-05-27T03:04:12.881Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": null
+      },
+      {
+        "id": 5137639,
+        "name": "Prosper AI Command Router - Internal Proof",
+        "isActive": null,
+        "scheduling": {
+          "type": "immediately"
+        },
+        "created": "2026-05-21T04:05:43.329Z",
+        "updated": null,
+        "teamId": 1495551,
+        "organizationId": null,
+        "folderId": 243775
+      }
+    ],
+    "hooks": [
+      {
+        "id": 2340059,
+        "name": "Prosper Quote Intake - Internal Proof",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5136889,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2340325,
+        "name": "Prosper AI Command Router - Internal Proof",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5137639,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2343250,
+        "name": "New Install Project",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5144384,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2343304,
+        "name": "Install Updates",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5144532,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2400089,
+        "name": "My gateway-webhook webhook",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5269392,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2400092,
+        "name": "My gateway-webhook webhook",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5269398,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2410679,
+        "name": "My Monday Board's Items webhook",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5269392,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2410703,
+        "name": "My Monday Board's Items webhook",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5337149,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2415303,
+        "name": "My Monday Board's Items webhook",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5301130,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      },
+      {
+        "id": 2426797,
+        "name": "Monday -> GHL Sync",
+        "type": "web",
+        "teamId": 1495551,
+        "scenarioId": 5327037,
+        "enabled": true,
+        "attached": true,
+        "url": "<redacted-webhook-url>"
+      }
+    ],
+    "connections": [
+      {
+        "id": 9265385,
+        "name": "ghl v2",
+        "type": null,
+        "accountName": "highlevel4",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9320207,
+        "name": "My Gemini AI connection",
+        "type": null,
+        "accountName": "gemini-ai-q9zyjp",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9325729,
+        "name": "My Gmail connection",
+        "type": null,
+        "accountName": "google-email",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9264976,
+        "name": "My GoHighlevel Company OAuth 2.0 connection",
+        "type": null,
+        "accountName": "highlevel4",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9321007,
+        "name": "My Google Drive connection",
+        "type": null,
+        "accountName": "google-drive",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9321567,
+        "name": "My Make's AI Provider connection",
+        "type": null,
+        "accountName": "ai-provider",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9320239,
+        "name": "My NVIDIA connection",
+        "type": null,
+        "accountName": "nvidia",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 8993049,
+        "name": "Prosper GitHub - prosperenergy",
+        "type": null,
+        "accountName": "github",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 9067984,
+        "name": "Prosper Main",
+        "type": null,
+        "accountName": "highlevel3",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 8993066,
+        "name": "Prosper Make - Internal Ops",
+        "type": null,
+        "accountName": "make",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 8993029,
+        "name": "Prosper monday - Ops Cockpit",
+        "type": null,
+        "accountName": "monday",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 8993036,
+        "name": "Prosper Netlify - Site Ops",
+        "type": null,
+        "accountName": "netlify",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      },
+      {
+        "id": 8993159,
+        "name": "Prosper signNow - Signing Queue",
+        "type": null,
+        "accountName": "signnow",
+        "teamId": 1495551,
+        "scopes": null,
+        "verified": null,
+        "expired": null
+      }
+    ]
+  },
+  "telnyx": {
+    "phoneNumbers": [
+      {
+        "id": "2955471873799882321",
+        "phoneNumber": "+13043988798",
+        "status": "active",
+        "messagingProfileName": "Prosper Reactivation AI - Ripley",
+        "messagingProfileId": "40019de4-53fc-4fd6-a1fd-f92d17389983",
+        "connectionName": null,
+        "connectionId": "",
+        "createdAt": "2026-05-08T18:35:02.404Z",
+        "updatedAt": "2026-05-08T18:35:03.099Z"
+      },
+      {
+        "id": "2944077428877690006",
+        "phoneNumber": "+18035904429",
+        "status": "active",
+        "messagingProfileName": "Prosper SMS",
+        "messagingProfileId": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "connectionName": "ai-assistant-abc948e5-c799-4671-b74d-c664c61981e2",
+        "connectionId": "2951352051008799896",
+        "createdAt": "2026-04-23T01:16:18.676Z",
+        "updatedAt": "2026-05-07T22:54:43.809Z"
+      },
+      {
+        "id": "2934520933395727873",
+        "phoneNumber": "+17029726492",
+        "status": "active",
+        "messagingProfileName": "S2HIAZD4LdIdHsm1hnYZ - MSG Profile",
+        "messagingProfileId": "40019dc5-708b-4777-a6df-3ee5fc96b78c",
+        "connectionName": "crmphoneproS2HIAZD4LdIdHsm1hnYZ",
+        "connectionId": "2945981668202120235",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-04-25T16:19:42.174Z"
+      },
+      {
+        "id": "2934520933370562048",
+        "phoneNumber": "+17029601485",
+        "status": "active",
+        "messagingProfileName": "Prosper SMS",
+        "messagingProfileId": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "connectionName": "ai-assistant-d43e2525-34da-48ea-9535-506594fe3b9c",
+        "connectionId": "2954999971918644805",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-08T02:57:29.630Z"
+      },
+      {
+        "id": "2934520933362173439",
+        "phoneNumber": "+17029474766",
+        "status": "active",
+        "messagingProfileName": "Prosper SMS",
+        "messagingProfileId": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "connectionName": "ai-assistant-6481f289-12a0-4ded-94bd-5cadc2d1a5b2",
+        "connectionId": "2955000013861684807",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-08T02:57:34.677Z"
+      },
+      {
+        "id": "2934520933345396222",
+        "phoneNumber": "+17028199001",
+        "status": "active",
+        "messagingProfileName": "Prosper SMS",
+        "messagingProfileId": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "connectionName": "ai-assistant-ce699eac-c383-49b4-a745-d8fff5722529",
+        "connectionId": "2955000053799847499",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-08T02:57:39.318Z"
+      },
+      {
+        "id": "2934520933337007613",
+        "phoneNumber": "+17027666275",
+        "status": "active",
+        "messagingProfileName": "Prosper SMS",
+        "messagingProfileId": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "connectionName": "ai-assistant-4359a65f-a4b4-4e0f-b842-5571f611ae14",
+        "connectionId": "2955000091850573389",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-08T02:57:43.834Z"
+      },
+      {
+        "id": "2934520933311841788",
+        "phoneNumber": "+17027103529",
+        "status": "active",
+        "messagingProfileName": "Reactivation Engine",
+        "messagingProfileId": "40019dab-9281-42b6-92e8-ad47d5610628",
+        "connectionName": "assistable",
+        "connectionId": "2945546862817445214",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-04-25T02:04:16.554Z"
+      },
+      {
+        "id": "2934520933303453179",
+        "phoneNumber": "+17026057295",
+        "status": "active",
+        "messagingProfileName": "Reactivation Engine",
+        "messagingProfileId": "40019dab-9281-42b6-92e8-ad47d5610628",
+        "connectionName": "assistable",
+        "connectionId": "2945546862817445214",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-04-25T02:04:18.608Z"
+      },
+      {
+        "id": "2934520933286675962",
+        "phoneNumber": "+17025530278",
+        "status": "active",
+        "messagingProfileName": "Reactivation Engine",
+        "messagingProfileId": "40019dab-9281-42b6-92e8-ad47d5610628",
+        "connectionName": "assistable",
+        "connectionId": "2945546862817445214",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-03T02:14:25.560Z"
+      },
+      {
+        "id": "2934520933269898745",
+        "phoneNumber": "+17025054626",
+        "status": "active",
+        "messagingProfileName": "Reactivation Engine",
+        "messagingProfileId": "40019dab-9281-42b6-92e8-ad47d5610628",
+        "connectionName": "assistable",
+        "connectionId": "2945546862817445214",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-03T02:14:24.647Z"
+      },
+      {
+        "id": "2934520933244732920",
+        "phoneNumber": "+17023897403",
+        "status": "active",
+        "messagingProfileName": "Reactivation Engine",
+        "messagingProfileId": "40019dab-9281-42b6-92e8-ad47d5610628",
+        "connectionName": "assistable",
+        "connectionId": "2945546862817445214",
+        "createdAt": "2026-04-09T20:49:15.665Z",
+        "updatedAt": "2026-05-03T02:14:23.695Z"
+      },
+      {
+        "id": "2925279750446384246",
+        "phoneNumber": "+19179707465",
+        "status": "active",
+        "messagingProfileName": "Operation JUICY",
+        "messagingProfileId": "40019da2-d6b1-4a6d-b069-35ac1386418d",
+        "connectionName": "Prosper LiveKit SIP",
+        "connectionId": "2925198157367215638",
+        "createdAt": "2026-03-28T02:48:40.829Z",
+        "updatedAt": "2026-05-04T22:45:30.396Z"
+      },
+      {
+        "id": "2887595780623828234",
+        "phoneNumber": "+12028711657",
+        "status": "active",
+        "messagingProfileName": "Prosper SMS",
+        "messagingProfileId": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "connectionName": "ai-assistant-31f984d9-81cb-409b-9e9f-419c6e31abac",
+        "connectionId": "2954894267891320741",
+        "createdAt": "2026-02-04T02:57:21.560Z",
+        "updatedAt": "2026-05-07T23:28:12.169Z"
+      }
+    ],
+    "messagingProfiles": [
+      {
+        "id": "40019c26-9784-4dd6-ba28-ac6ed572037a",
+        "name": "Fair Rate Alliance",
+        "enabled": true,
+        "createdAt": "2026-02-04T02:59:50.096Z",
+        "updatedAt": "2026-05-17T22:20:57.834Z"
+      },
+      {
+        "id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "name": "Prosper SMS",
+        "enabled": false,
+        "createdAt": "2026-04-09T20:52:36.441Z",
+        "updatedAt": "2026-05-17T22:20:58.274Z"
+      },
+      {
+        "id": "40019da2-d6b1-4a6d-b069-35ac1386418d",
+        "name": "Operation JUICY",
+        "enabled": true,
+        "createdAt": "2026-04-18T23:04:32.419Z",
+        "updatedAt": "2026-05-17T22:20:58.989Z"
+      },
+      {
+        "id": "40019dab-9281-42b6-92e8-ad47d5610628",
+        "name": "Reactivation Engine",
+        "enabled": true,
+        "createdAt": "2026-04-20T15:46:38.505Z",
+        "updatedAt": "2026-05-17T22:20:59.448Z"
+      },
+      {
+        "id": "40019dc5-708b-4777-a6df-3ee5fc96b78c",
+        "name": "S2HIAZD4LdIdHsm1hnYZ - MSG Profile",
+        "enabled": true,
+        "createdAt": "2026-04-25T16:19:40.529Z",
+        "updatedAt": "2026-05-17T22:20:59.883Z"
+      },
+      {
+        "id": "40019dc7-a9b6-4b32-b3aa-9ed22ceb0e69",
+        "name": "Kaley Text",
+        "enabled": true,
+        "createdAt": "2026-04-26T02:41:21.586Z",
+        "updatedAt": "2026-05-17T22:21:00.297Z"
+      },
+      {
+        "id": "40019de4-53fc-4fd6-a1fd-f92d17389983",
+        "name": "Prosper Reactivation AI - Ripley",
+        "enabled": false,
+        "createdAt": "2026-05-01T16:16:42.744Z",
+        "updatedAt": "2026-05-18T11:09:50.827Z"
+      },
+      {
+        "id": "40019df5-254f-438e-a768-fe33f5780b00",
+        "name": "ai-assistant-abc948e5-c799-4671-b74d-c664c61981e2",
+        "enabled": true,
+        "createdAt": "2026-05-04T22:39:16.281Z",
+        "updatedAt": "2026-05-17T22:21:01.185Z"
+      }
+    ],
+    "connections": [
+      {
+        "id": "2954850912645940996",
+        "type": "credential_connection",
+        "name": "Default Credential Connection",
+        "active": true,
+        "outboundVoiceProfileId": "2951352049591125143",
+        "createdAt": "2026-05-07T22:01:18Z",
+        "updatedAt": "2026-05-07T22:01:19Z"
+      },
+      {
+        "id": "2951352053022065818",
+        "type": "credential_connection",
+        "name": "Default",
+        "active": true,
+        "outboundVoiceProfileId": "2951352049591125143",
+        "createdAt": "2026-05-03T02:09:41Z",
+        "updatedAt": "2026-05-03T02:09:41Z"
+      },
+      {
+        "id": "2945981668202120235",
+        "type": "credential_connection",
+        "name": "crmphoneproS2HIAZD4LdIdHsm1hnYZ",
+        "active": true,
+        "outboundVoiceProfileId": "2945981665257718826",
+        "createdAt": "2026-04-25T16:19:41Z",
+        "updatedAt": "2026-04-25T16:19:41Z"
+      },
+      {
+        "id": "2945546862817445214",
+        "type": "fqdn_connection",
+        "name": "assistable",
+        "active": true,
+        "outboundVoiceProfileId": "2925195896318592358",
+        "createdAt": "2026-04-25T01:55:48Z",
+        "updatedAt": "2026-04-25T02:29:36Z"
+      },
+      {
+        "id": "2942654148060907287",
+        "type": "credential_connection",
+        "name": "Hanna AI Voice (Telnyx + Gemini)",
+        "active": true,
+        "outboundVoiceProfileId": "2925195896318592358",
+        "createdAt": "2026-04-21T02:08:30Z",
+        "updatedAt": "2026-04-21T20:08:36Z"
+      },
+      {
+        "id": "2925776650404628165",
+        "type": "credential_connection",
+        "name": "OpenClaw WebRTC",
+        "active": true,
+        "outboundVoiceProfileId": "2925195896318592358",
+        "createdAt": "2026-03-28T19:15:55Z",
+        "updatedAt": "2026-03-28T19:24:10Z"
+      },
+      {
+        "id": "2925198157367215638",
+        "type": "fqdn_connection",
+        "name": "Prosper LiveKit SIP",
+        "active": true,
+        "outboundVoiceProfileId": "2925195896318592358",
+        "createdAt": "2026-03-28T00:06:34Z",
+        "updatedAt": "2026-04-22T02:55:23Z"
+      },
+      {
+        "id": "2887594360013063958",
+        "type": "credential_connection",
+        "name": "Forward Only",
+        "active": true,
+        "outboundVoiceProfileId": null,
+        "createdAt": "2026-02-04T02:54:32Z",
+        "updatedAt": "2026-02-04T02:54:32Z"
+      }
+    ],
+    "fqdnConnections": [
+      {
+        "id": "2945546862817445214",
+        "record_type": "fqdn_connection",
+        "connection_name": "assistable",
+        "active": true,
+        "webhook_event_url": null,
+        "webhook_api_version": "2",
+        "transport_protocol": "UDP",
+        "anchorsite_override": "Latency",
+        "created_at": "2026-04-25T01:55:48Z",
+        "updated_at": "2026-04-25T02:29:36Z"
+      },
+      {
+        "id": "2925198157367215638",
+        "record_type": "fqdn_connection",
+        "connection_name": "Prosper LiveKit SIP",
+        "active": true,
+        "webhook_event_url": "<redacted-url>",
+        "webhook_api_version": "2",
+        "transport_protocol": "TCP",
+        "anchorsite_override": "Latency",
+        "created_at": "2026-03-28T00:06:34Z",
+        "updated_at": "2026-04-22T02:55:23Z"
+      }
+    ],
+    "fqdns": [
+      {
+        "id": "2943402525467870431",
+        "record_type": "fqdn",
+        "connection_id": 2925198157367215600,
+        "fqdn": "5t4n6j0wnrl.sip.livekit.cloud",
+        "created_at": "2026-04-22T02:55:23Z",
+        "updated_at": "2026-04-22T02:55:23Z"
+      },
+      {
+        "id": "2945548477985195409",
+        "record_type": "fqdn",
+        "connection_id": 2945546862817445400,
+        "fqdn": "5t4n6j0wnrl.sip.livekit.cloud",
+        "created_at": "2026-04-25T01:59:01Z",
+        "updated_at": "2026-04-25T01:59:01Z"
+      }
+    ],
+    "outboundVoiceProfiles": [
+      {
+        "id": "2951352049591125143",
+        "record_type": "outbound_voice_profile",
+        "name": "Default",
+        "enabled": true,
+        "created_at": "2026-05-03T02:09:41Z",
+        "updated_at": "2026-05-03T02:09:41Z"
+      },
+      {
+        "id": "2945981665257718826",
+        "record_type": "outbound_voice_profile",
+        "name": "S2HIAZD4LdIdHsm1hnYZ - Voice Profile",
+        "enabled": true,
+        "created_at": "2026-04-25T16:19:41Z",
+        "updated_at": "2026-04-25T16:19:41Z"
+      },
+      {
+        "id": "2925195896318592358",
+        "record_type": "outbound_voice_profile",
+        "name": "Prosper AI Voice",
+        "enabled": true,
+        "created_at": "2026-03-28T00:02:04Z",
+        "updated_at": "2026-04-15T02:20:17Z"
+      }
+    ],
+    "prosperSmsProfileNumbers": [
+      {
+        "id": "2887595780623828234",
+        "record_type": "messaging_phone_number",
+        "phone_number": "+12028711657",
+        "messaging_profile_id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "created_at": "2026-05-07T23:28:13.479Z",
+        "updated_at": "2026-05-07T23:28:13.479Z"
+      },
+      {
+        "id": "2934520933337007613",
+        "record_type": "messaging_phone_number",
+        "phone_number": "+17027666275",
+        "messaging_profile_id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "created_at": "2026-05-08T02:57:44.430Z",
+        "updated_at": "2026-05-08T02:57:44.430Z"
+      },
+      {
+        "id": "2934520933345396222",
+        "record_type": "messaging_phone_number",
+        "phone_number": "+17028199001",
+        "messaging_profile_id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "created_at": "2026-05-08T02:57:39.907Z",
+        "updated_at": "2026-05-08T02:57:39.907Z"
+      },
+      {
+        "id": "2934520933362173439",
+        "record_type": "messaging_phone_number",
+        "phone_number": "+17029474766",
+        "messaging_profile_id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "created_at": "2026-05-08T02:57:35.272Z",
+        "updated_at": "2026-05-08T02:57:35.272Z"
+      },
+      {
+        "id": "2934520933370562048",
+        "record_type": "messaging_phone_number",
+        "phone_number": "+17029601485",
+        "messaging_profile_id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "created_at": "2026-05-08T02:57:30.294Z",
+        "updated_at": "2026-05-08T02:57:30.294Z"
+      },
+      {
+        "id": "2944077428877690006",
+        "record_type": "messaging_phone_number",
+        "phone_number": "+18035904429",
+        "messaging_profile_id": "40019d74-04ab-4d0e-b225-700dafa0d7ab",
+        "created_at": "2026-05-08T02:58:26.340Z",
+        "updated_at": "2026-05-08T02:58:26.340Z"
+      }
+    ]
+  }
+}

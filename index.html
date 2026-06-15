@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Prosper GHL Map</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Prosper Shield</p>
+        <h1>GHL Live Map</h1>
+      </div>
+      <div class="meta">
+        <span id="updated">Loading...</span>
+        <span>Read-only</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="Search and filters">
+        <input id="search" type="search" placeholder="Search accounts, numbers, workflows, hooks, users..." autofocus />
+        <div class="chips" id="chips"></div>
+      </section>
+
+      <section class="kpis" id="kpis"></section>
+
+      <section class="grid">
+        <article class="panel wide">
+          <div class="panel-head">
+            <h2>Sub-Accounts</h2>
+            <span id="account-count"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="accounts-table"></table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2>Phone Risks</h2>
+          </div>
+          <div id="phone-risks" class="stack"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <h2>GHL / Make / n8n / Telnyx</h2>
+          </div>
+          <div id="integration-summary" class="stack"></div>
+        </article>
+
+        <article class="panel wide">
+          <div class="panel-head">
+            <h2>n8n Workflows</h2>
+            <span id="n8n-count"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="n8n-table"></table>
+          </div>
+        </article>
+
+        <article class="panel wide">
+          <div class="panel-head">
+            <h2>GHL Browser Pages</h2>
+            <span id="ghl-page-count"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="ghl-pages-table"></table>
+          </div>
+        </article>
+
+        <article class="panel wide">
+          <div class="panel-head">
+            <h2>PROSPER MAIN Users + Numbers</h2>
+            <span id="prosper-main-count"></span>
+          </div>
+          <div class="split">
+            <div>
+              <h3>Users</h3>
+              <div id="prosper-main-users" class="token-grid"></div>
+            </div>
+            <div>
+              <h3>Phone Assignments</h3>
+              <div class="table-wrap"><table id="prosper-main-phones"></table></div>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel wide">
+          <div class="panel-head">
+            <h2>Make.com</h2>
+            <span id="make-count"></span>
+          </div>
+          <div class="split">
+            <div>
+              <h3>Scenarios</h3>
+              <div class="table-wrap"><table id="make-scenarios"></table></div>
+            </div>
+            <div>
+              <h3>Hooks</h3>
+              <div class="table-wrap"><table id="make-hooks"></table></div>
+            </div>
+          </div>
+          <h3>Connections</h3>
+          <div class="table-wrap"><table id="make-connections"></table></div>
+        </article>
+
+        <article class="panel wide">
+          <div class="panel-head">
+            <h2>Telnyx</h2>
+            <span id="telnyx-count"></span>
+          </div>
+          <div class="table-wrap">
+            <table id="telnyx-table"></table>
+          </div>
+          <div class="split lower">
+            <div>
+              <h3>Messaging Profiles</h3>
+              <div class="table-wrap"><table id="telnyx-profiles"></table></div>
+            </div>
+            <div>
+              <h3>Voice / SIP Connections</h3>
+              <div class="table-wrap"><table id="telnyx-connections"></table></div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
