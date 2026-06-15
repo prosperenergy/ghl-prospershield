@@ -1,6 +1,6 @@
 # GHL Full Live Connection Map
 
-Generated: 2026-06-15T00:40:17.348Z
+Generated: 2026-06-15T00:46:57.755Z
 Mode: read-only inventory. No customer sends, SMS fallback, workflow activations, public posts, billing changes, permission changes, deletes, or outbound tests were performed.
 
 ## Executive Summary
@@ -205,5 +205,8 @@ Abdourahamane Diallo, Abidemi Mary Adebayo, Akpaka Kenechukwu sandra, Amber Gant
 
 ## Search Site
 
+Live site: https://ghl.prospershield.io
+GitHub repo: https://github.com/prosperenergy/ghl-prospershield
+GitHub wiki source: https://github.com/prosperenergy/ghl-prospershield/tree/main/wiki
 Static site source: /Volumes/Samgsung T9/04_Fleet-Ops/ghl/site
 Data file: /Volumes/Samgsung T9/04_Fleet-Ops/ghl/site/data/ghl-live-map.json
