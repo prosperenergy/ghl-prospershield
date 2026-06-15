@@ -124,7 +124,7 @@ input[type="search"]:focus {
 
 .kpis {
   display: grid;
-  grid-template-columns: repeat(5, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 12px;
   margin-bottom: 18px;
 }
@@ -176,6 +176,12 @@ input[type="search"]:focus {
   color: var(--muted);
   font-size: 13px;
   font-weight: 700;
+}
+
+.panel-note {
+  margin: -2px 0 12px;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 .table-wrap {

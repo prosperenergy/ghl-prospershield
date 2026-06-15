@@ -35,6 +35,7 @@ function renderKpis(data) {
     ["Visible opportunities", data.totals.opportunities],
     ["n8n workflows", data.n8n.workflows.length],
     ["Telnyx numbers", data.telnyx.phoneNumbers.length],
+    ["Credential refs", data.totals.credentialRefs],
   ];
   $("kpis").innerHTML = kpis
     .map(([label, value]) => `<div class="kpi"><strong>${fmt.format(value)}</strong><span>${label}</span></div>`)
@@ -67,6 +68,18 @@ function renderCards(data) {
     .filter((item) => !state.query || textMatches(item, state.query))
     .map((item) => `<div class="item"><strong>${item.title}</strong><p>${item.detail}</p></div>`)
     .join("");
+}
+
+function renderCredentials(data) {
+  const rows = rowsFor(data.credentialMap.systems || []);
+  $("credential-count").textContent = `${rows.length} systems visible`;
+  renderTable($("credentials-table"), [
+    { label: "System", key: "system" },
+    { label: "Status", key: "validation" },
+    { label: "Connector", key: "connector" },
+    { label: "Credential refs", render: (r) => (r.credentialRefs || []).join(", ") },
+    { label: "Login / auth note", key: "loginStatus" },
+  ], rows);
 }
 
 function renderN8n(data) {
@@ -180,6 +193,7 @@ function render() {
   renderKpis(data);
   renderAccounts(data);
   renderCards(data);
+  renderCredentials(data);
   renderN8n(data);
   renderGhlPages(data);
   renderProsperMain(data);
