@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 
 const root = "/Volumes/Samgsung T9/04_Fleet-Ops/ghl";
@@ -6,6 +7,7 @@ const live = path.join(root, "live-data");
 const siteData = path.join(root, "site", "data");
 const wikiDir = "/Users/craigstratton/prosper-brain/wiki/sales";
 const generatedAt = new Date().toISOString();
+const envPath = process.env.PROSPER_ENV_PATH || path.join(os.homedir(), ".config", "prosper", "prosper.env");
 
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, "utf8"));
@@ -31,7 +33,7 @@ function markdownTable(headers, rows) {
 }
 
 function readEnvNames() {
-  const envPath = "/Users/craigstratton/.config/prosper/prosper.env";
+  if (!fs.existsSync(envPath)) return [];
   const text = fs.readFileSync(envPath, "utf8");
   const names = [];
   for (const line of text.split(/\r?\n/)) {
@@ -42,7 +44,7 @@ function readEnvNames() {
 }
 
 function readEnvEntries() {
-  const envPath = "/Users/craigstratton/.config/prosper/prosper.env";
+  if (!fs.existsSync(envPath)) return [];
   const text = fs.readFileSync(envPath, "utf8");
   const entries = [];
   for (const [index, line] of text.split(/\r?\n/).entries()) {
@@ -64,7 +66,7 @@ function readEnvEntries() {
     .map((entry) => ({
       ...entry,
       occurrences: counts.get(entry.name) || 1,
-      storage: "~/.config/prosper/prosper.env",
+      storage: envPath,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
