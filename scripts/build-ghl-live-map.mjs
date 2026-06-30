@@ -1,10 +1,17 @@
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = "/Volumes/Samgsung T9/04_Fleet-Ops/ghl";
-const live = path.join(root, "live-data");
-const siteData = path.join(root, "site", "data");
-const wikiDir = "/Users/craigstratton/prosper-brain/wiki/sales";
+const scriptDir = path.dirname(fileURLToPath(import.meta.url));
+const repoRoot = path.resolve(scriptDir, "..");
+const live = path.join(repoRoot, "live-data");
+const siteData = path.join(repoRoot, "data");
+const docsDir = path.join(repoRoot, "docs");
+const wikiDir = path.join(repoRoot, "wiki");
+const checkedInDataPath = path.join(siteData, "ghl-live-map.json");
+const checkedInReportPath = path.join(docsDir, "GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md");
+const checkedInWikiPath = path.join(wikiDir, "GHL-Full-Live-Connection-Map.md");
+const fallbackData = fs.existsSync(checkedInDataPath) ? readJson(checkedInDataPath) : null;
 const generatedAt = new Date().toISOString();
 
 function readJson(file) {
@@ -30,19 +37,11 @@ function markdownTable(headers, rows) {
   ].join("\n");
 }
 
-function readEnvNames() {
-  const envPath = "/Users/craigstratton/.config/prosper/prosper.env";
-  const text = fs.readFileSync(envPath, "utf8");
-  const names = [];
-  for (const line of text.split(/\r?\n/)) {
-    const match = line.match(/^\s*(?:export\s+)?([A-Za-z_][A-Za-z0-9_]*)=/);
-    if (match) names.push(match[1]);
-  }
-  return [...new Set(names)].sort();
+function readJsonIfExists(file, fallback) {
+  return fs.existsSync(file) ? readJson(file) : fallback;
 }
 
-function readEnvEntries() {
-  const envPath = "/Users/craigstratton/.config/prosper/prosper.env";
+function readEnvEntriesFromFile(envPath) {
   const text = fs.readFileSync(envPath, "utf8");
   const entries = [];
   for (const [index, line] of text.split(/\r?\n/).entries()) {
@@ -65,6 +64,22 @@ function readEnvEntries() {
       ...entry,
       occurrences: counts.get(entry.name) || 1,
       storage: "~/.config/prosper/prosper.env",
+    }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function readEnvEntries() {
+  const envPath = process.env.PROSPER_ENV_PATH || path.join(process.env.HOME || "", ".config", "prosper", "prosper.env");
+  if (envPath && fs.existsSync(envPath)) {
+    return readEnvEntriesFromFile(envPath);
+  }
+  return (fallbackData?.credentialMap?.details || [])
+    .map((entry) => ({
+      name: entry.name,
+      valueState: entry.valueState || "set",
+      line: null,
+      occurrences: entry.occurrences || 1,
+      storage: entry.storage || "repository snapshot",
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -551,41 +566,54 @@ const prosperMainPhoneAssignments = [
   capabilities,
 }));
 
-const n8nWorkflows = readJson(path.join(live, "n8n-workflows.summary.json"));
-const makeScenarios = readJson(path.join(live, "make-scenarios.summary.json"));
-const makeHooks = readJson(path.join(live, "make-hooks.summary.json"));
-const makeConnections = readJson(path.join(live, "make-connections.summary.json"));
-const telnyx = readJson(path.join(live, "telnyx-summary.json"));
+const n8nWorkflows = readJsonIfExists(path.join(live, "n8n-workflows.summary.json"), fallbackData?.n8n?.workflows || []);
+const makeScenarios = readJsonIfExists(path.join(live, "make-scenarios.summary.json"), fallbackData?.make?.scenarios || []);
+const makeHooks = readJsonIfExists(path.join(live, "make-hooks.summary.json"), fallbackData?.make?.hooks || []);
+const makeConnections = readJsonIfExists(path.join(live, "make-connections.summary.json"), fallbackData?.make?.connections || []);
+const telnyxSummary = readJsonIfExists(path.join(live, "telnyx-summary.json"), null);
+const telnyx = telnyxSummary || {
+  fqdn_connections_page_size_250: fallbackData?.telnyx?.fqdnConnections || [],
+  fqdns_page_size_250: fallbackData?.telnyx?.fqdns || [],
+  outbound_voice_profiles_page_size_250: fallbackData?.telnyx?.outboundVoiceProfiles || [],
+  verified_numbers_page_size_250: [],
+  messaging_profiles_40019d74_04ab_4d0e_b225_700dafa0d7ab_phone_numbers_page_size_250: fallbackData?.telnyx?.prosperSmsProfileNumbers || [],
+};
 
-const telnyxPhoneNumbers = (telnyx.phone_numbers_page_size_250 || []).map((number) => ({
-  id: number.id,
-  phoneNumber: number.phone_number,
-  status: number.status,
-  messagingProfileName: number.messaging_profile_name,
-  messagingProfileId: number.messaging_profile_id,
-  connectionName: number.connection_name,
-  connectionId: number.connection_id,
-  createdAt: number.created_at,
-  updatedAt: number.updated_at,
-}));
+const telnyxPhoneNumbers = telnyxSummary
+  ? (telnyx.phone_numbers_page_size_250 || []).map((number) => ({
+    id: number.id,
+    phoneNumber: number.phone_number,
+    status: number.status,
+    messagingProfileName: number.messaging_profile_name,
+    messagingProfileId: number.messaging_profile_id,
+    connectionName: number.connection_name,
+    connectionId: number.connection_id,
+    createdAt: number.created_at,
+    updatedAt: number.updated_at,
+  }))
+  : (fallbackData?.telnyx?.phoneNumbers || []);
 
-const telnyxConnections = (telnyx.connections_page_size_250 || []).map((connection) => ({
-  id: connection.id,
-  type: connection.record_type,
-  name: connection.connection_name,
-  active: connection.active,
-  outboundVoiceProfileId: connection.outbound_voice_profile_id,
-  createdAt: connection.created_at,
-  updatedAt: connection.updated_at,
-}));
+const telnyxConnections = telnyxSummary
+  ? (telnyx.connections_page_size_250 || []).map((connection) => ({
+    id: connection.id,
+    type: connection.record_type,
+    name: connection.connection_name,
+    active: connection.active,
+    outboundVoiceProfileId: connection.outbound_voice_profile_id,
+    createdAt: connection.created_at,
+    updatedAt: connection.updated_at,
+  }))
+  : (fallbackData?.telnyx?.connections || []);
 
-const telnyxMessagingProfiles = (telnyx.messaging_profiles_page_size_250 || []).map((profile) => ({
-  id: profile.id,
-  name: profile.name,
-  enabled: profile.enabled,
-  createdAt: profile.created_at,
-  updatedAt: profile.updated_at,
-}));
+const telnyxMessagingProfiles = telnyxSummary
+  ? (telnyx.messaging_profiles_page_size_250 || []).map((profile) => ({
+    id: profile.id,
+    name: profile.name,
+    enabled: profile.enabled,
+    createdAt: profile.created_at,
+    updatedAt: profile.updated_at,
+  }))
+  : (fallbackData?.telnyx?.messagingProfiles || []);
 
 const activeAccounts = accounts.filter((account) => account.activity === "Active").length;
 const staleAccounts = accounts.filter((account) => account.activity === "Stale").length;
@@ -1079,19 +1107,19 @@ ${markdownTable(["ID", "Type", "Name", "Active", "Outbound voice profile", "Upda
 Live site: https://ghl.prospershield.io
 GitHub repo: https://github.com/prosperenergy/ghl-prospershield
 GitHub wiki source: https://github.com/prosperenergy/ghl-prospershield/tree/main/wiki
-Static site source: ${path.join(root, "site")}
+Static site source: ${repoRoot}
 Data file: ${path.join(siteData, "ghl-live-map.json")}
 `;
 
 writeJson(path.join(siteData, "ghl-live-map.json"), data);
 writeJson(path.join(live, "ghl-live-map.combined.json"), data);
-writeText(path.join(root, "GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md"), report);
-writeText(path.join(wikiDir, "ghl-full-live-connection-map.md"), report);
+writeText(checkedInReportPath, report);
+writeText(checkedInWikiPath, report);
 
 console.log(JSON.stringify({
   generatedAt,
   dataFile: path.join(siteData, "ghl-live-map.json"),
-  reportFile: path.join(root, "GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md"),
-  wikiFile: path.join(wikiDir, "ghl-full-live-connection-map.md"),
+  reportFile: checkedInReportPath,
+  wikiFile: checkedInWikiPath,
   totals,
 }, null, 2));
