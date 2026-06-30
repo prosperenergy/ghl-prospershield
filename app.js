@@ -21,7 +21,19 @@ function rowsFor(items) {
 }
 
 function statusClass(status) {
-  return `status-${String(status || "").toLowerCase()}`;
+  const normalized = String(status || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]/g, "-");
+  return `status-${normalized}`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
 }
 
 function setTheme(theme) {
@@ -41,8 +53,8 @@ function setSearch(query) {
 
 function renderTable(el, headers, rows) {
   el.innerHTML = [
-    `<thead><tr>${headers.map((h) => `<th>${h.label}</th>`).join("")}</tr></thead>`,
-    `<tbody>${rows.map((row) => `<tr>${headers.map((h) => `<td>${h.render ? h.render(row) : row[h.key] ?? ""}</td>`).join("")}</tr>`).join("")}</tbody>`,
+    `<thead><tr>${headers.map((h) => `<th>${escapeHtml(h.label)}</th>`).join("")}</tr></thead>`,
+    `<tbody>${rows.map((row) => `<tr>${headers.map((h) => `<td>${h.render ? h.render(row) : escapeHtml(row[h.key] ?? "")}</td>`).join("")}</tr>`).join("")}</tbody>`,
   ].join("");
 }
 
@@ -57,7 +69,7 @@ function renderKpis(data) {
     ["Routes", data.totals.connectionRoutes],
   ];
   $("kpis").innerHTML = kpis
-    .map(([label, value]) => `<div class="kpi"><strong>${fmt.format(value)}</strong><span>${label}</span></div>`)
+    .map(([label, value]) => `<div class="kpi"><strong>${escapeHtml(fmt.format(value))}</strong><span>${escapeHtml(label)}</span></div>`)
     .join("");
 }
 
@@ -89,7 +101,7 @@ function renderPlainSummary(data) {
     },
   ];
   $("plain-summary").innerHTML = cards
-    .map((card) => `<div class="plain-card"><strong>${card.title}</strong><p>${card.detail}</p></div>`)
+    .map((card) => `<div class="plain-card"><strong>${escapeHtml(card.title)}</strong><p>${escapeHtml(card.detail)}</p></div>`)
     .join("");
 }
 
@@ -107,7 +119,7 @@ function renderAttention(data) {
   const rows = rowsFor(attention);
   $("attention-count").textContent = `${rows.length} visible`;
   $("attention-list").innerHTML = rows
-    .map((item) => `<button class="item action-item" type="button" data-search="${item.title.split(":")[0]}"><strong>${item.title}</strong><p>${item.detail}</p></button>`)
+    .map((item) => `<button class="item action-item" type="button" data-search="${escapeHtml(item.title.split(":")[0])}"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></button>`)
     .join("");
   $("attention-list").querySelectorAll("[data-search]").forEach((button) => {
     button.addEventListener("click", () => setSearch(button.dataset.search));
@@ -126,7 +138,7 @@ function renderGlossary(data) {
   ];
   const rows = rowsFor(glossary.map(([title, detail]) => ({ title, detail })));
   $("glossary-list").innerHTML = rows
-    .map((item) => `<button class="item action-item" type="button" data-search="${item.title}"><strong>${item.title}</strong><p>${item.detail}</p></button>`)
+    .map((item) => `<button class="item action-item" type="button" data-search="${escapeHtml(item.title)}"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></button>`)
     .join("");
   $("glossary-list").querySelectorAll("[data-search]").forEach((button) => {
     button.addEventListener("click", () => setSearch(button.dataset.search));
@@ -138,10 +150,10 @@ function renderAccounts(data) {
   $("account-count").textContent = `${rows.length} visible`;
   renderTable($("accounts-table"), [
     { label: "Sub-account", key: "name" },
-    { label: "Activity", render: (r) => `<span class="${statusClass(r.activity)}">${r.activity}</span>` },
+    { label: "Activity", render: (r) => `<span class="${statusClass(r.activity)}">${escapeHtml(r.activity)}</span>` },
     { label: "Last login", key: "lastLogin" },
-    { label: "Contacts", render: (r) => fmt.format(r.contacts) },
-    { label: "Opps", render: (r) => r.opportunities == null ? "Not rendered" : fmt.format(r.opportunities) },
+    { label: "Contacts", render: (r) => escapeHtml(fmt.format(r.contacts)) },
+    { label: "Opps", render: (r) => r.opportunities == null ? "Not rendered" : escapeHtml(fmt.format(r.opportunities)) },
     { label: "Visible phone", key: "visiblePhone" },
     { label: "Phone status", key: "phoneStatus" },
     { label: "LC Email", key: "lcEmail" },
@@ -152,12 +164,12 @@ function renderAccounts(data) {
 function renderCards(data) {
   $("phone-risks").innerHTML = data.phoneRisks
     .filter((item) => !state.query || textMatches(item, state.query))
-    .map((item) => `<div class="item"><strong>${item.title}</strong><p>${item.detail}</p></div>`)
+    .map((item) => `<div class="item"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></div>`)
     .join("");
 
   $("integration-summary").innerHTML = data.integrationSummary
     .filter((item) => !state.query || textMatches(item, state.query))
-    .map((item) => `<div class="item"><strong>${item.title}</strong><p>${item.detail}</p></div>`)
+    .map((item) => `<div class="item"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></div>`)
     .join("");
 }
 
@@ -168,7 +180,7 @@ function renderCredentials(data) {
     { label: "System", key: "system" },
     { label: "Status", key: "validation" },
     { label: "Connector", key: "connector" },
-    { label: "Credential refs", render: (r) => (r.credentialRefs || []).join(", ") },
+    { label: "Credential refs", render: (r) => (r.credentialRefs || []).map((ref) => escapeHtml(ref)).join(", ") },
     { label: "Login / auth note", key: "loginStatus" },
   ], rows);
 }
@@ -182,7 +194,7 @@ function renderCredentialRoutes(data) {
     { label: "Source", key: "source" },
     { label: "Connector", key: "connector" },
     { label: "Target", key: "target" },
-    { label: "Credential refs", render: (r) => (r.credentialRefs || []).join(", ") },
+    { label: "Credential refs", render: (r) => (r.credentialRefs || []).map((ref) => escapeHtml(ref)).join(", ") },
     { label: "Live objects", key: "liveObjects" },
     { label: "Notes", key: "notes" },
   ], rows);
@@ -212,8 +224,8 @@ function renderN8n(data) {
     { label: "Active", render: (r) => r.active ? "yes" : "no" },
     { label: "Updated", key: "updatedAt" },
     { label: "Nodes", key: "nodeCount" },
-    { label: "Webhook paths", render: (r) => (r.webhookPaths || []).map((w) => w.path).filter(Boolean).join(", ") },
-    { label: "Integrations", render: (r) => (r.integrations || []).join(", ") },
+    { label: "Webhook paths", render: (r) => (r.webhookPaths || []).map((w) => w.path).filter(Boolean).map((path) => escapeHtml(path)).join(", ") },
+    { label: "Integrations", render: (r) => (r.integrations || []).map((integration) => escapeHtml(integration)).join(", ") },
   ], rows);
 }
 
@@ -230,7 +242,7 @@ function renderProsperMain(data) {
   const users = rowsFor((data.prosperMain.users || []).map((name) => ({ name })));
   const phones = rowsFor(data.prosperMain.phoneAssignments || []);
   $("prosper-main-count").textContent = `${users.length} users, ${phones.length} numbers visible`;
-  $("prosper-main-users").innerHTML = users.map((user) => `<span class="token">${user.name}</span>`).join("");
+  $("prosper-main-users").innerHTML = users.map((user) => `<span class="token">${escapeHtml(user.name)}</span>`).join("");
   renderTable($("prosper-main-phones"), [
     { label: "Number", key: "number" },
     { label: "Friendly name", key: "friendlyName" },
@@ -249,7 +261,7 @@ function renderMake(data) {
     { label: "ID", key: "id" },
     { label: "Scenario", key: "name" },
     { label: "Active", render: (r) => r.isActive === true ? "yes" : r.isActive === false ? "no" : "not returned" },
-    { label: "Scheduling", render: (r) => r.scheduling?.type || r.scheduling || "" },
+    { label: "Scheduling", render: (r) => escapeHtml(r.scheduling?.type || r.scheduling || "") },
   ], scenarios);
   renderTable($("make-hooks"), [
     { label: "ID", key: "id" },
