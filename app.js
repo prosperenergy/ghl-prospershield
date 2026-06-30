@@ -10,6 +10,10 @@ const fmt = new Intl.NumberFormat("en-US");
 
 const $ = (id) => document.getElementById(id);
 
+function esc(str) {
+  return String(str ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
 function textMatches(value, q) {
   return JSON.stringify(value).toLowerCase().includes(q.toLowerCase());
 }
@@ -42,7 +46,7 @@ function setSearch(query) {
 function renderTable(el, headers, rows) {
   el.innerHTML = [
     `<thead><tr>${headers.map((h) => `<th>${h.label}</th>`).join("")}</tr></thead>`,
-    `<tbody>${rows.map((row) => `<tr>${headers.map((h) => `<td>${h.render ? h.render(row) : row[h.key] ?? ""}</td>`).join("")}</tr>`).join("")}</tbody>`,
+    `<tbody>${rows.map((row) => `<tr>${headers.map((h) => `<td>${h.render ? h.render(row) : esc(row[h.key])}</td>`).join("")}</tr>`).join("")}</tbody>`,
   ].join("");
 }
 
@@ -89,7 +93,7 @@ function renderPlainSummary(data) {
     },
   ];
   $("plain-summary").innerHTML = cards
-    .map((card) => `<div class="plain-card"><strong>${card.title}</strong><p>${card.detail}</p></div>`)
+    .map((card) => `<div class="plain-card"><strong>${esc(card.title)}</strong><p>${esc(card.detail)}</p></div>`)
     .join("");
 }
 
@@ -107,7 +111,7 @@ function renderAttention(data) {
   const rows = rowsFor(attention);
   $("attention-count").textContent = `${rows.length} visible`;
   $("attention-list").innerHTML = rows
-    .map((item) => `<button class="item action-item" type="button" data-search="${item.title.split(":")[0]}"><strong>${item.title}</strong><p>${item.detail}</p></button>`)
+    .map((item) => `<button class="item action-item" type="button" data-search="${esc(item.title.split(":")[0])}"><strong>${esc(item.title)}</strong><p>${esc(item.detail)}</p></button>`)
     .join("");
   $("attention-list").querySelectorAll("[data-search]").forEach((button) => {
     button.addEventListener("click", () => setSearch(button.dataset.search));
@@ -126,7 +130,7 @@ function renderGlossary(data) {
   ];
   const rows = rowsFor(glossary.map(([title, detail]) => ({ title, detail })));
   $("glossary-list").innerHTML = rows
-    .map((item) => `<button class="item action-item" type="button" data-search="${item.title}"><strong>${item.title}</strong><p>${item.detail}</p></button>`)
+    .map((item) => `<button class="item action-item" type="button" data-search="${esc(item.title)}"><strong>${esc(item.title)}</strong><p>${esc(item.detail)}</p></button>`)
     .join("");
   $("glossary-list").querySelectorAll("[data-search]").forEach((button) => {
     button.addEventListener("click", () => setSearch(button.dataset.search));
@@ -152,12 +156,12 @@ function renderAccounts(data) {
 function renderCards(data) {
   $("phone-risks").innerHTML = data.phoneRisks
     .filter((item) => !state.query || textMatches(item, state.query))
-    .map((item) => `<div class="item"><strong>${item.title}</strong><p>${item.detail}</p></div>`)
+    .map((item) => `<div class="item"><strong>${esc(item.title)}</strong><p>${esc(item.detail)}</p></div>`)
     .join("");
 
   $("integration-summary").innerHTML = data.integrationSummary
     .filter((item) => !state.query || textMatches(item, state.query))
-    .map((item) => `<div class="item"><strong>${item.title}</strong><p>${item.detail}</p></div>`)
+    .map((item) => `<div class="item"><strong>${esc(item.title)}</strong><p>${esc(item.detail)}</p></div>`)
     .join("");
 }
 
@@ -230,7 +234,7 @@ function renderProsperMain(data) {
   const users = rowsFor((data.prosperMain.users || []).map((name) => ({ name })));
   const phones = rowsFor(data.prosperMain.phoneAssignments || []);
   $("prosper-main-count").textContent = `${users.length} users, ${phones.length} numbers visible`;
-  $("prosper-main-users").innerHTML = users.map((user) => `<span class="token">${user.name}</span>`).join("");
+  $("prosper-main-users").innerHTML = users.map((user) => `<span class="token">${esc(user.name)}</span>`).join("");
   renderTable($("prosper-main-phones"), [
     { label: "Number", key: "number" },
     { label: "Friendly name", key: "friendlyName" },
