@@ -11,7 +11,7 @@ const fmt = new Intl.NumberFormat("en-US");
 const $ = (id) => document.getElementById(id);
 
 function textMatches(value, q) {
-  return JSON.stringify(value).toLowerCase().includes(q.toLowerCase());
+  return JSON.stringify(value ?? "").toLowerCase().includes(q.toLowerCase());
 }
 
 function rowsFor(items) {
@@ -146,7 +146,7 @@ function renderGlossary(data) {
 }
 
 function renderAccounts(data) {
-  const rows = rowsFor(data.accounts).filter((row) => state.filter === "all" || row.activity.toLowerCase() === state.filter);
+  const rows = rowsFor(data.accounts).filter((row) => state.filter === "all" || String(row.activity ?? "").toLowerCase() === state.filter);
   $("account-count").textContent = `${rows.length} visible`;
   renderTable($("accounts-table"), [
     { label: "Sub-account", key: "name" },
@@ -224,7 +224,7 @@ function renderN8n(data) {
     { label: "Active", render: (r) => r.active ? "yes" : "no" },
     { label: "Updated", key: "updatedAt" },
     { label: "Nodes", key: "nodeCount" },
-    { label: "Webhook paths", render: (r) => (r.webhookPaths || []).map((w) => w.path).filter(Boolean).map((path) => escapeHtml(path)).join(", ") },
+    { label: "Webhook paths", render: (r) => (r.webhookPaths || []).map((w) => w?.path).filter(Boolean).map((path) => escapeHtml(path)).join(", ") },
     { label: "Integrations", render: (r) => (r.integrations || []).map((integration) => escapeHtml(integration)).join(", ") },
   ], rows);
 }
@@ -335,7 +335,6 @@ function renderChips() {
     button.addEventListener("click", () => {
       state.filter = "all";
       setSearch(button.dataset.query);
-      render();
     });
   });
 }
