@@ -1,7 +1,7 @@
 # Prosper Shield GHL Live Map
 
 Canonical URL: https://ghl.prospershield.io
-Generated: 2026-06-30T16:05:44.430Z
+Generated: 2026-07-11T05:30:21.079Z
 Source data generated: 2026-06-15T01:09:32.083Z
 
 This site is a read-only, redacted map of Prosper Shield's GoHighLevel, Make.com, n8n, Telnyx, Supabase, GitHub, Netlify, Cloudflare, Monday, Gemini, Redis, 1Password, Setmore, SignNow, and related connector surfaces.
