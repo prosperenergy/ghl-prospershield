@@ -6,8 +6,10 @@ const state = {
   theme: localStorage.getItem("ghl-theme") || "light",
 };
 
+const SEARCH_INPUT_DEBOUNCE_MS = 120;
 const fmt = new Intl.NumberFormat("en-US");
 const searchTextCache = new WeakMap();
+let searchInputTimer = null;
 
 const $ = (id) => document.getElementById(id);
 
@@ -62,6 +64,10 @@ function setTheme(theme) {
 }
 
 function setSearch(query) {
+  if (searchInputTimer !== null) {
+    window.clearTimeout(searchInputTimer);
+    searchInputTimer = null;
+  }
   state.quickQuery = query;
   $("search").value = query;
   state.query = query;
@@ -398,10 +404,17 @@ fetch("./data/ghl-live-map.json")
     setTheme(state.theme);
     $("theme-toggle").addEventListener("click", () => setTheme(state.theme === "dark" ? "light" : "dark"));
     $("search").addEventListener("input", (event) => {
-      state.query = event.target.value.trim();
-      state.quickQuery = state.query;
-      state.filter = "all";
-      render();
+      const inputValue = event.target.value;
+      if (searchInputTimer !== null) {
+        window.clearTimeout(searchInputTimer);
+      }
+      searchInputTimer = window.setTimeout(() => {
+        state.query = inputValue.trim();
+        state.quickQuery = state.query;
+        state.filter = "all";
+        searchInputTimer = null;
+        render();
+      }, SEARCH_INPUT_DEBOUNCE_MS);
     });
     render();
   });
