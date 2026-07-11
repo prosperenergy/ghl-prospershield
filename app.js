@@ -7,15 +7,31 @@ const state = {
 };
 
 const fmt = new Intl.NumberFormat("en-US");
+const searchTextCache = new WeakMap();
 
 const $ = (id) => document.getElementById(id);
 
 function textMatches(value, q) {
-  return JSON.stringify(value).toLowerCase().includes(q.toLowerCase());
+  if (!q) return true;
+
+  let normalizedValue = "";
+  if (value == null) {
+    normalizedValue = "";
+  } else if (typeof value === "object") {
+    normalizedValue = searchTextCache.get(value);
+    if (!normalizedValue) {
+      normalizedValue = JSON.stringify(value).toLowerCase();
+      searchTextCache.set(value, normalizedValue);
+    }
+  } else {
+    normalizedValue = String(value).toLowerCase();
+  }
+
+  return normalizedValue.includes(q);
 }
 
 function rowsFor(items) {
-  const q = state.query || state.quickQuery;
+  const q = (state.query || state.quickQuery || "").toLowerCase();
   if (!q) return items;
   return items.filter((item) => textMatches(item, q));
 }
@@ -335,7 +351,6 @@ function renderChips() {
     button.addEventListener("click", () => {
       state.filter = "all";
       setSearch(button.dataset.query);
-      render();
     });
   });
 }
