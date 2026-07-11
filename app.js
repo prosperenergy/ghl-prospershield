@@ -13,6 +13,7 @@ const $ = (id) => document.getElementById(id);
 
 function textMatches(value, q) {
   if (!q) return true;
+  const normalizedQuery = String(q).toLowerCase();
 
   let normalizedValue = "";
   if (value == null) {
@@ -27,7 +28,7 @@ function textMatches(value, q) {
     normalizedValue = String(value).toLowerCase();
   }
 
-  return normalizedValue.includes(q);
+  return normalizedValue.includes(normalizedQuery);
 }
 
 function rowsFor(items) {
