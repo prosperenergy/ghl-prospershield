@@ -6,16 +6,35 @@ const state = {
   theme: localStorage.getItem("ghl-theme") || "light",
 };
 
+const SEARCH_INPUT_DEBOUNCE_MS = 120;
 const fmt = new Intl.NumberFormat("en-US");
+const searchTextCache = new WeakMap();
+let searchInputTimer = null;
 
 const $ = (id) => document.getElementById(id);
 
 function textMatches(value, q) {
-  return JSON.stringify(value).toLowerCase().includes(q.toLowerCase());
+  if (!q) return true;
+  const normalizedQuery = String(q).toLowerCase();
+
+  let normalizedValue = "";
+  if (value == null) {
+    normalizedValue = "";
+  } else if (typeof value === "object") {
+    normalizedValue = searchTextCache.get(value);
+    if (!normalizedValue) {
+      normalizedValue = JSON.stringify(value).toLowerCase();
+      searchTextCache.set(value, normalizedValue);
+    }
+  } else {
+    normalizedValue = String(value).toLowerCase();
+  }
+
+  return normalizedValue.includes(normalizedQuery);
 }
 
 function rowsFor(items) {
-  const q = state.query || state.quickQuery;
+  const q = (state.query || state.quickQuery || "").toLowerCase();
   if (!q) return items;
   return items.filter((item) => textMatches(item, q));
 }
@@ -45,6 +64,10 @@ function setTheme(theme) {
 }
 
 function setSearch(query) {
+  if (searchInputTimer !== null) {
+    window.clearTimeout(searchInputTimer);
+    searchInputTimer = null;
+  }
   state.quickQuery = query;
   $("search").value = query;
   state.query = query;
@@ -335,7 +358,6 @@ function renderChips() {
     button.addEventListener("click", () => {
       state.filter = "all";
       setSearch(button.dataset.query);
-      render();
     });
   });
 }
@@ -382,10 +404,17 @@ fetch("./data/ghl-live-map.json")
     setTheme(state.theme);
     $("theme-toggle").addEventListener("click", () => setTheme(state.theme === "dark" ? "light" : "dark"));
     $("search").addEventListener("input", (event) => {
-      state.query = event.target.value.trim();
-      state.quickQuery = state.query;
-      state.filter = "all";
-      render();
+      const inputValue = event.target.value;
+      if (searchInputTimer !== null) {
+        window.clearTimeout(searchInputTimer);
+      }
+      searchInputTimer = window.setTimeout(() => {
+        state.query = inputValue.trim();
+        state.quickQuery = state.query;
+        state.filter = "all";
+        searchInputTimer = null;
+        render();
+      }, SEARCH_INPUT_DEBOUNCE_MS);
     });
     render();
   });
