@@ -13,9 +13,9 @@ let searchInputTimer = null;
 
 const $ = (id) => document.getElementById(id);
 
-function textMatches(value, q) {
+function textMatches(value, q, queryIsNormalized = false) {
   if (!q) return true;
-  const normalizedQuery = String(q).toLowerCase();
+  const normalizedQuery = queryIsNormalized ? String(q) : String(q).toLowerCase();
 
   let normalizedValue = "";
   if (value == null) {
@@ -36,7 +36,7 @@ function textMatches(value, q) {
 function rowsFor(items) {
   const q = (state.query || state.quickQuery || "").toLowerCase();
   if (!q) return items;
-  return items.filter((item) => textMatches(item, q));
+  return items.filter((item) => textMatches(item, q, true));
 }
 
 function statusClass(status) {
@@ -104,7 +104,7 @@ function renderPlainSummary(data) {
     },
     {
       title: "Main Working Account",
-      detail: `PROSPER MAIN is the active center: ${fmt.format(data.accounts.find((account) => account.name === "PROSPER MAIN")?.contacts || 0)} contacts, 47 users, and 15 GHL phone assignments.`,
+      detail: `PROSPER MAIN is the active center: ${fmt.format(data.accounts.find((account) => account.name === "PROSPER MAIN")?.contacts || 0)} contacts, ${fmt.format((data.prosperMain?.users || []).length)} users, and ${fmt.format((data.prosperMain?.phoneAssignments || []).length)} GHL phone assignments.`,
     },
     {
       title: "Automation Layer",
