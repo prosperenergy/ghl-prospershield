@@ -341,7 +341,6 @@ function renderChips() {
     button.addEventListener("click", () => {
       state.filter = "all";
       setSearch(button.dataset.query);
-      render();
     });
   });
 }
