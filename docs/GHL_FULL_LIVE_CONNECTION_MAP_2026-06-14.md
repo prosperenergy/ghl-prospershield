@@ -1,6 +1,6 @@
 # GHL Full Live Connection Map
 
-Generated: 2026-06-15T01:09:32.083Z
+Generated: 2026-07-11T05:30:21.119Z
 Mode: read-only inventory. No customer sends, SMS fallback, workflow activations, public posts, billing changes, permission changes, deletes, or outbound tests were performed.
 
 ## Executive Summary
@@ -13,7 +13,7 @@ Mode: read-only inventory. No customer sends, SMS fallback, workflow activations
 - Make.com: 10 scenarios, 10 hooks, 13 connections
 - n8n: 16 workflows, 7 active
 - Telnyx: 14 active phone numbers, 8 messaging profiles, 8 voice/SIP connections
-- Credential/connector systems mapped: 16; credential refs listed: 248; route rows: 16
+- Credential/connector systems mapped: 16; credential refs listed: 246; route rows: 16
 
 ## Access And Limits
 
@@ -21,10 +21,6 @@ Mode: read-only inventory. No customer sends, SMS fallback, workflow activations
 - 1Password CLI was present but not signed in in this shell.
 - Agency browser routes supplied counts, last-login, and phone status for non-main locations.
 - Telnyx brand and 10DLC campaign probes returned Telnyx 10005 resource-not-found on the tested endpoints, while env still contains brand/campaign identifiers.
-
-## AI Injection Entry Point
-
-Use https://ghl.prospershield.io/ai-context.md as the first file when attaching this map to another AI. Then attach or reference https://ghl.prospershield.io/data/ghl-live-map.json as the source of truth. The AI context tells assistants how to answer Prosper-specific GHL, connector, and setup questions without inventing secrets or recommending unsafe live actions.
 
 ## GHL Subaccounts
 
@@ -98,12 +94,12 @@ Raw token/password/login values are not published. This table maps the credentia
 | n8n | n8n REST API + webhook workflow refs | validated | N8N_API_KEY, N8N_MCP_TOKEN, N8N_MCP_URL, N8N_URL, N8N_WEBHOOK_INBOUND_SMS, N8N_WEBHOOK_OUTBOUND_CALL, N8N_WEBHOOK_OUTBOUND_SMS, N8N_WEBHOOK_VOICE_EVENTS, N8N_WF_INBOUND_SMS, N8N_WF_OUTBOUND_CALL, N8N_WF_OUTBOUND_SMS, N8N_WF_POST_CALL_SYNC | N8N_API_KEY returned HTTP 200 against workflows. |
 | Telnyx | Telnyx Messaging, phone numbers, SIP, LiveKit/Assistable voice | validated | TELNYX_API_KEY, TELNYX_BRAND_ID, TELNYX_CAMPAIGN_ID, TELNYX_FQDN_ID, TELNYX_LIVEKIT_FQDN, TELNYX_MSG_PROFILE_ID, TELNYX_MSG_PROFILE_NAME, TELNYX_OVP_ID, TELNYX_OVP_NAME, TELNYX_PRIMARY_NUMBER, TELNYX_SIP_CONNECTION_ID, TELNYX_SIP_CONNECTION_NAME, TELNYX_SIP_PASSWORD, TELNYX_SIP_USERNAME, TELNYX_TCR_BRAND, TELNYX_TCR_CAMPAIGN | TELNYX_API_KEY returned HTTP 200 for phone numbers. SIP username/password refs exist but values are redacted. |
 | Supabase | Supabase REST knowledge_base + agent_activity_log | validated | SUPABASE_ACCESS_TOKEN, SUPABASE_ANON_KEY, SUPABASE_DB_URL, SUPABASE_JWT_SECRET, SUPABASE_MINDFORGE_URL, SUPABASE_PUBLISHABLE_KEY, SUPABASE_SECRET_KEY, SUPABASE_SERVICE_ROLE_KEY, SUPABASE_URL | SUPABASE_SERVICE_ROLE_KEY returned HTTP 200 and successfully updated the GHL knowledge base. |
-| GitHub | GitHub CLI/API + prosperenergy shared user repo | validated | GITHUB_COPILOT_TOKEN, GITHUB_ORG, GITHUB_PAT, GITHUB_TOKEN | gh is authenticated as prosperenergy and pushed the ghl-prospershield repo. GitHub wiki is enabled; separate wiki remote did not accept pushes, so wiki source is committed under /wiki. |
+| GitHub | GitHub CLI/API + prosperenergy shared user repo | validated | GH_TOKEN, GITHUB_COPILOT_TOKEN, GITHUB_MODELS_TOKEN, GITHUB_ORG, GITHUB_PAT, GITHUB_TOKEN | gh is authenticated as prosperenergy and pushed the ghl-prospershield repo. GitHub wiki is enabled; separate wiki remote did not accept pushes, so wiki source is committed under /wiki. |
 | Netlify | Netlify API deploy + custom domain | validated | NETLIFY_AUTH_TOKEN, NETLIFY_PAT_CURRENT, NETLIFY_PAT_FULL_ACCESS, NETLIFY_PAT_HANNA, NETLIFY_PAT_MINDFORGE, NETLIFY_PAT_MINDFORGE_2, NETLIFY_PAT_MINDFORGE_SITE, NETLIFY_TEAM, NETLIFY_TEAM_ID | NETLIFY_AUTH_TOKEN returned HTTP 200 and deployed ghl.prospershield.io. |
 | Cloudflare | Cloudflare DNS for prospershield.io | validated | CLOUDFLARE_API_TOKEN | CLOUDFLARE_API_TOKEN verified and created the CNAME for ghl.prospershield.io. |
 | Monday.com | Monday API + Make connection + Prosper boards | validated | MONDAY_ACCOUNT_SLUG, MONDAY_API_KEY, MONDAY_BOARD_ID, MONDAY_INSTALL_PIPELINE_BOARD_ID, MONDAY_INSTALL_PIPELINE_BOARD_URL, MONDAY_INSTALL_PIPELINE_DASHBOARD_DOC_ID, MONDAY_INSTALL_PIPELINE_DASHBOARD_DOC_URL, MONDAY_INSTALL_PIPELINE_SUBITEMS_BOARD_ID, MONDAY_INSTALLER_BOARD_ID, MONDAY_KYC_BOARD_ID, MONDAY_OWNER_EMAIL, MONDAY_REP_BOARD_ID, MONDAY_SP_COL_ADDRESS, MONDAY_SP_COL_DAYS_IN_LANE, MONDAY_SP_COL_DEALER, MONDAY_SP_COL_EMAIL, MONDAY_SP_COL_FILING, MONDAY_SP_COL_HERO, MONDAY_SP_COL_KW, MONDAY_SP_COL_KYC, MONDAY_SP_COL_LANE, MONDAY_SP_COL_LAST_ACTIVITY, MONDAY_SP_COL_LAST_SMS, MONDAY_SP_COL_MODE, MONDAY_SP_COL_NAME, MONDAY_SP_COL_NEXT_ACTION, MONDAY_SP_COL_PDF, MONDAY_SP_COL_PHONE, MONDAY_SP_COL_REP, MONDAY_SP_COL_SOURCE, MONDAY_SP_COL_STATE, MONDAY_SP_COL_SUBMITTED, MONDAY_SP_COL_SUPABASE_ID, MONDAY_SP_COL_TRACKING, MONDAY_SP_COL_VALUE, MONDAY_TOKEN, MONDAY_WORKSPACE_ID | MONDAY_API_KEY returned HTTP 200 for the current user query. |
-| Google / Gemini | Gemini API, Google OAuth clients, Google APIs | validated | BRAIN_GOOGLE_CLIENT_ID, BRAIN_GOOGLE_CLIENT_SECRET, BRAIN_GOOGLE_DESKTOP_CLIENT_ID, BRAIN_GOOGLE_DESKTOP_CLIENT_SECRET, BRAIN_GOOGLE_WEB_CLIENT_ID, BRAIN_GOOGLE_WEB_CLIENT_SECRET, GEMINI_API_KEY, GEMINI_CLI_TRUST_WORKSPACE, GOOGLE_API_KEY, GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_QUOTA_PROJECT, GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_MAPS_API_KEY, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SOLAR_API_KEY, MADDIE_GEMINI_MODEL | GEMINI_API_KEY returned HTTP 200 for model listing. OAuth client refs are present but not reauthenticated here. |
-| Redis | Prosper Redis bus + agent streams | validated | PROSPER_REDIS_BUS_ENABLED, REDIS_API_KEY, REDIS_CLOUD_API_KEY, REDIS_CLOUD_API_KEY_OP, REDIS_DUAL_WRITE_ENABLED, REDIS_HOST, REDIS_PASSWORD_OP, REDIS_PORT, REDIS_STREAM_MAXLEN, REDIS_STREAMS_PRIMARY, REDIS_TLS, REDIS_URL, REDIS_USER | redis-prosper returned PONG. |
+| Google / Gemini | Gemini API, Google OAuth clients, Google APIs | validated | BRAIN_GOOGLE_CLIENT_ID, BRAIN_GOOGLE_CLIENT_SECRET, BRAIN_GOOGLE_DESKTOP_CLIENT_ID, BRAIN_GOOGLE_DESKTOP_CLIENT_SECRET, BRAIN_GOOGLE_WEB_CLIENT_ID, BRAIN_GOOGLE_WEB_CLIENT_SECRET, GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_QUOTA_PROJECT, GOOGLE_MAPS_API_KEY, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SOLAR_API_KEY | GEMINI_API_KEY returned HTTP 200 for model listing. OAuth client refs are present but not reauthenticated here. |
+| Redis | Prosper Redis bus + agent streams | validated | PROSPER_REDIS_BUS_ENABLED, REDIS_API_KEY, REDIS_CLOUD_API_KEY, REDIS_CLOUD_API_KEY_OP, REDIS_DUAL_WRITE_ENABLED, REDIS_HOST, REDIS_PASSWORD, REDIS_PASSWORD_OP, REDIS_PORT, REDIS_STREAM_MAXLEN, REDIS_STREAMS_PRIMARY, REDIS_TLS, REDIS_URL, REDIS_USER | redis-prosper returned PONG. |
 | 1Password / OP | 1Password CLI/service-token refs | validated-service-account | ONEPASSWORD_CONNECT_TOKEN, OP_CONNECT_TOKEN, OP_SERVICE_ACCOUNT_TOKEN | OP_SERVICE_ACCOUNT_TOKEN validated as a 1Password service account. Interactive op whoami without the service token still has no signed-in user account in this shell. |
 | Setmore | Setmore booking API | needs-reauth | SETMORE_API_KEY | SETMORE_API_KEY is present but the tested services endpoint returned HTTP 401. |
 | SignNow | SignNow e-signature API | validated-auth-endpoint | SIGNNOW_ACCOUNT_EMAIL, SIGNNOW_ACCOUNT_PASSWORD, SIGNNOW_API_BASE, SIGNNOW_BASIC_AUTH, SIGNNOW_CLIENT_ID, SIGNNOW_CLIENT_SECRET, SIGNNOW_MAIN_FOLDER_ID, SIGNNOW_TEAM_FOLDER_ID, SIGNNOW_WEBHOOK_SECRET | SignNow basic/OAuth endpoint returned HTTP 200. No document, signing, or invite action was performed. |
@@ -125,8 +121,8 @@ Raw token/password/login values are not published. This table maps the credentia
 | GitHub wiki/source route | GITHUB_TOKEN | GitHub CLI/API/git | prosperenergy/ghl-prospershield | validated | GITHUB_TOKEN, GITHUB_PAT, GITHUB_ORG | Public repo main branch; wiki source under /wiki | GitHub has wiki enabled but the separate wiki git remote did not accept pushes. |
 | Public site route | NETLIFY_AUTH_TOKEN + CLOUDFLARE_API_TOKEN | Netlify deploy + Cloudflare DNS | https://ghl.prospershield.io | validated | NETLIFY_AUTH_TOKEN, NETLIFY_TEAM, CLOUDFLARE_API_TOKEN | Netlify site ghl-prospershield; Cloudflare CNAME ghl.prospershield.io | Public site hosts redacted refs only. |
 | Monday operations route | MONDAY_API_KEY | Monday API + Make connection | Prosper boards, columns, install pipeline, GHL sync | validated | MONDAY_API_KEY, MONDAY_BOARD_ID, MONDAY_INSTALL_PIPELINE_BOARD_ID, MONDAY_INSTALL_PIPELINE_BOARD_URL, MONDAY_INSTALL_PIPELINE_DASHBOARD_DOC_ID, MONDAY_INSTALL_PIPELINE_DASHBOARD_DOC_URL, MONDAY_INSTALL_PIPELINE_SUBITEMS_BOARD_ID, MONDAY_INSTALLER_BOARD_ID, MONDAY_KYC_BOARD_ID, MONDAY_REP_BOARD_ID, MONDAY_SP_COL_ADDRESS, MONDAY_SP_COL_DAYS_IN_LANE, MONDAY_SP_COL_DEALER, MONDAY_SP_COL_EMAIL, MONDAY_SP_COL_FILING, MONDAY_SP_COL_HERO, MONDAY_SP_COL_KW, MONDAY_SP_COL_KYC, MONDAY_SP_COL_LANE, MONDAY_SP_COL_LAST_ACTIVITY, MONDAY_SP_COL_LAST_SMS, MONDAY_SP_COL_MODE, MONDAY_SP_COL_NAME, MONDAY_SP_COL_NEXT_ACTION, MONDAY_SP_COL_PDF, MONDAY_SP_COL_PHONE, MONDAY_SP_COL_REP, MONDAY_SP_COL_SOURCE, MONDAY_SP_COL_STATE, MONDAY_SP_COL_SUBMITTED, MONDAY_SP_COL_SUPABASE_ID, MONDAY_SP_COL_TRACKING, MONDAY_SP_COL_VALUE, MONDAY_WORKSPACE_ID | Monday current-user query returned HTTP 200; board/column refs present | No Monday records were modified. |
-| Google/Gemini model route | GEMINI_API_KEY | Google Generative Language API | Gemini model listing and Prosper AI model surfaces | validated | BRAIN_GOOGLE_CLIENT_ID, BRAIN_GOOGLE_CLIENT_SECRET, BRAIN_GOOGLE_DESKTOP_CLIENT_ID, BRAIN_GOOGLE_DESKTOP_CLIENT_SECRET, BRAIN_GOOGLE_WEB_CLIENT_ID, BRAIN_GOOGLE_WEB_CLIENT_SECRET, GEMINI_API_KEY, GEMINI_CLI_TRUST_WORKSPACE, GOOGLE_API_KEY, GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_QUOTA_PROJECT, GOOGLE_GENERATIVE_AI_API_KEY, GOOGLE_MAPS_API_KEY, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SOLAR_API_KEY, MADDIE_GEMINI_MODEL | Gemini models endpoint returned HTTP 200 | OAuth client refs exist but no browser reauth was performed. |
-| Redis fleet bus route | REDIS_URL/redis-prosper | Redis direct helper | Prosper fleet bus and agent streams | validated | PROSPER_REDIS_BUS_ENABLED, REDIS_API_KEY, REDIS_CLOUD_API_KEY, REDIS_CLOUD_API_KEY_OP, REDIS_DUAL_WRITE_ENABLED, REDIS_HOST, REDIS_PASSWORD_OP, REDIS_PORT, REDIS_STREAM_MAXLEN, REDIS_STREAMS_PRIMARY, REDIS_TLS, REDIS_URL, REDIS_USER | PING returned PONG | No CMUX control was used. |
+| Google/Gemini model route | GEMINI_API_KEY | Google Generative Language API | Gemini model listing and Prosper AI model surfaces | validated | BRAIN_GOOGLE_CLIENT_ID, BRAIN_GOOGLE_CLIENT_SECRET, BRAIN_GOOGLE_DESKTOP_CLIENT_ID, BRAIN_GOOGLE_DESKTOP_CLIENT_SECRET, BRAIN_GOOGLE_WEB_CLIENT_ID, BRAIN_GOOGLE_WEB_CLIENT_SECRET, GOOGLE_APPLICATION_CREDENTIALS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_CLOUD_PROJECT, GOOGLE_CLOUD_QUOTA_PROJECT, GOOGLE_MAPS_API_KEY, GOOGLE_SERVICE_ACCOUNT_EMAIL, GOOGLE_SOLAR_API_KEY | Gemini models endpoint returned HTTP 200 | OAuth client refs exist but no browser reauth was performed. |
+| Redis fleet bus route | REDIS_URL/redis-prosper | Redis direct helper | Prosper fleet bus and agent streams | validated | PROSPER_REDIS_BUS_ENABLED, REDIS_API_KEY, REDIS_CLOUD_API_KEY, REDIS_CLOUD_API_KEY_OP, REDIS_DUAL_WRITE_ENABLED, REDIS_HOST, REDIS_PASSWORD, REDIS_PASSWORD_OP, REDIS_PORT, REDIS_STREAM_MAXLEN, REDIS_STREAMS_PRIMARY, REDIS_TLS, REDIS_URL, REDIS_USER | PING returned PONG | No CMUX control was used. |
 | 1Password vault/service route | OP_SERVICE_ACCOUNT_TOKEN | 1Password CLI service account | Vault-backed credential lookup surface | validated-service-account | OP_SERVICE_ACCOUNT_TOKEN, OP_CONNECT_TOKEN, ONEPASSWORD_CONNECT_TOKEN | op whoami reported SERVICE_ACCOUNT when service token was provided | Interactive op login is still absent in this shell. |
 | Setmore booking route | SETMORE_API_KEY | Setmore booking API | Setmore booking/service read surface | needs-reauth | SETMORE_API_KEY | Tested services endpoint returned HTTP 401 | No Setmore writes were performed. |
 | SignNow signing route | SIGNNOW_BASIC_AUTH | SignNow auth/API refs | Signing folders, OAuth/basic auth, webhook refs | validated-auth-endpoint | SIGNNOW_ACCOUNT_EMAIL, SIGNNOW_ACCOUNT_PASSWORD, SIGNNOW_API_BASE, SIGNNOW_BASIC_AUTH, SIGNNOW_CLIENT_ID, SIGNNOW_CLIENT_SECRET, SIGNNOW_MAIN_FOLDER_ID, SIGNNOW_TEAM_FOLDER_ID, SIGNNOW_WEBHOOK_SECRET | Auth endpoint returned HTTP 200 | No document or signing action was performed. |
@@ -155,8 +151,7 @@ Raw token/password/login values are not published. This table maps the credentia
 | ELEVENLABS_API_KEY | Other Prosper AI/vendor keys | secret | set | 1 | present-not-tested | name-only; value redacted | Prosper vendor or agent credential reference; not core to the GHL public route. | Prosper vendor env -> auxiliary agent/business tooling |
 | ELEVENLABS_API_KEY_OP | Other Prosper AI/vendor keys | secret | set | 1 | present-not-tested | name-only; value redacted | Prosper vendor or agent credential reference; not core to the GHL public route. | Prosper vendor env -> auxiliary agent/business tooling |
 | FIRECRAWL_API_KEY | Other Prosper AI/vendor keys | secret | set | 1 | present-not-tested | name-only; value redacted | Prosper vendor or agent credential reference; not core to the GHL public route. | Prosper vendor env -> auxiliary agent/business tooling |
-| GEMINI_API_KEY | Google / Gemini | secret | set | 1 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
-| GEMINI_CLI_TRUST_WORKSPACE | Google / Gemini | workspace-object | set | 1 | validated | name, role, and live linkage only | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
+| GH_TOKEN | GitHub | secret | set | 1 | validated | name-only; value redacted | GitHub auth/org reference for prosperenergy repo/wiki publishing. | GitHub env -> gh/API/git -> prosperenergy/ghl-prospershield |
 | GHL_API_BASE | GoHighLevel / HighLevel | endpoint | set | 1 | validated | name and role only; value not published | Prosper vendor or agent credential reference; not core to the GHL public route. | GHL env -> HighLevel API/browser -> subaccounts, users, phone assignments, social planner, webhooks |
 | GHL_API_KEY | GoHighLevel / HighLevel | secret | set | 1 | validated | name-only; value redacted | HighLevel API authentication for PROSPER MAIN reads and selected location/user/phone checks. | GHL env -> HighLevel API/browser -> subaccounts, users, phone assignments, social planner, webhooks |
 | GHL_API_TOKEN | GoHighLevel / HighLevel | secret | set | 1 | validated | name-only; value redacted | HighLevel API authentication for PROSPER MAIN reads and selected location/user/phone checks. | GHL env -> HighLevel API/browser -> subaccounts, users, phone assignments, social planner, webhooks |
@@ -171,16 +166,15 @@ Raw token/password/login values are not published. This table maps the credentia
 | GHL_WEBHOOK_URL | GoHighLevel / HighLevel | webhook-ref | set | 1 | validated | name-only; value redacted | HighLevel webhook ingress reference; raw URL/secret withheld. | GHL env -> HighLevel API/browser -> subaccounts, users, phone assignments, social planner, webhooks |
 | GHL_WEBHOOK_URL_OLD | GoHighLevel / HighLevel | webhook-ref | set | 1 | validated | name-only; value redacted | HighLevel webhook ingress reference; raw URL/secret withheld. | GHL env -> HighLevel API/browser -> subaccounts, users, phone assignments, social planner, webhooks |
 | GITHUB_COPILOT_TOKEN | GitHub | secret | set | 1 | validated | name-only; value redacted | GitHub auth/org reference for prosperenergy repo/wiki publishing. | GitHub env -> gh/API/git -> prosperenergy/ghl-prospershield |
+| GITHUB_MODELS_TOKEN | GitHub | secret | set | 1 | validated | name-only; value redacted | GitHub auth/org reference for prosperenergy repo/wiki publishing. | GitHub env -> gh/API/git -> prosperenergy/ghl-prospershield |
 | GITHUB_ORG | GitHub | object-id | set | 1 | validated | name, role, and live linkage only | GitHub auth/org reference for prosperenergy repo/wiki publishing. | GitHub env -> gh/API/git -> prosperenergy/ghl-prospershield |
 | GITHUB_PAT | GitHub | secret | set | 1 | validated | name-only; value redacted | GitHub auth/org reference for prosperenergy repo/wiki publishing. | GitHub env -> gh/API/git -> prosperenergy/ghl-prospershield |
 | GITHUB_TOKEN | GitHub | secret | set | 1 | validated | name-only; value redacted | GitHub auth/org reference for prosperenergy repo/wiki publishing. | GitHub env -> gh/API/git -> prosperenergy/ghl-prospershield |
-| GOOGLE_API_KEY | Google / Gemini | secret | set | 2 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_APPLICATION_CREDENTIALS | Google / Gemini | file-or-key-path | set | 1 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_CLIENT_ID | Google / Gemini | object-id | set | 1 | validated | name, role, and live linkage only | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_CLIENT_SECRET | Google / Gemini | secret | set | 1 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_CLOUD_PROJECT | Google / Gemini | object-id | set | 1 | validated | name, role, and live linkage only | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_CLOUD_QUOTA_PROJECT | Google / Gemini | object-id | set | 1 | validated | name, role, and live linkage only | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
-| GOOGLE_GENERATIVE_AI_API_KEY | Google / Gemini | secret | set | 1 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_MAPS_API_KEY | Google / Gemini | secret | set | 1 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_SERVICE_ACCOUNT_EMAIL | Google / Gemini | identity | set | 1 | validated | name and role only; value not published | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | GOOGLE_SOLAR_API_KEY | Google / Gemini | secret | set | 1 | validated | name-only; value redacted | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
@@ -193,7 +187,6 @@ Raw token/password/login values are not published. This table maps the credentia
 | IPQS_API_KEY | Other Prosper AI/vendor keys | secret | set | 1 | present-not-tested | name-only; value redacted | Prosper vendor or agent credential reference; not core to the GHL public route. | Prosper vendor env -> auxiliary agent/business tooling |
 | KALEY_HERMES_LOCAL_TAG | Other Prosper AI/vendor keys | configuration | set | 1 | present-not-tested | name, role, and live linkage only | Prosper vendor or agent credential reference; not core to the GHL public route. | Prosper vendor env -> auxiliary agent/business tooling |
 | KALEY_INTRO_CALL_TOKEN | Other Prosper AI/vendor keys | secret | set | 1 | present-not-tested | name-only; value redacted | Prosper vendor or agent credential reference; not core to the GHL public route. | Prosper vendor env -> auxiliary agent/business tooling |
-| MADDIE_GEMINI_MODEL | Google / Gemini | configuration | set | 1 | validated | name, role, and live linkage only | Google/Gemini API or OAuth reference. | Google/Gemini env -> model/API/OAuth surfaces |
 | MAKE_API_BASE | Make.com | endpoint | set | 1 | validated | name and role only; value not published | Prosper vendor or agent credential reference; not core to the GHL public route. | Make env -> Make API -> scenarios, hooks, connections, GHL/Monday sync |
 | MAKE_API_HOSTNAME | Make.com | endpoint | set | 1 | validated | name and role only; value not published | Prosper vendor or agent credential reference; not core to the GHL public route. | Make env -> Make API -> scenarios, hooks, connections, GHL/Monday sync |
 | MAKE_API_KEY | Make.com | secret | set | 1 | validated | name-only; value redacted | Make API token that validated live scenario/hook/connection reads. | Make env -> Make API -> scenarios, hooks, connections, GHL/Monday sync |
@@ -324,6 +317,7 @@ Raw token/password/login values are not published. This table maps the credentia
 | REDIS_CLOUD_API_KEY_OP | Redis | secret | set | 1 | validated | name-only; value redacted | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
 | REDIS_DUAL_WRITE_ENABLED | Redis | configuration | set | 1 | validated | name, role, and live linkage only | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
 | REDIS_HOST | Redis | endpoint | set | 1 | validated | name and role only; value not published | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
+| REDIS_PASSWORD | Redis | secret | set | 1 | validated | name-only; value redacted | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
 | REDIS_PASSWORD_OP | Redis | secret | set | 1 | validated | name-only; value redacted | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
 | REDIS_PORT | Redis | configuration | set | 1 | validated | name, role, and live linkage only | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
 | REDIS_STREAM_MAXLEN | Redis | configuration | set | 1 | validated | name, role, and live linkage only | Prosper Redis bus/stream/connection reference. | Redis env -> redis-prosper -> fleet bus/agent streams |
@@ -505,20 +499,10 @@ Raw token/password/login values are not published. This table maps the credentia
 - Social blast remains held until Craig gives explicit go.
 - Webhook URLs, API tokens, and credentials are intentionally redacted from this wiki and the site data.
 
-## Navigation And AI Access
-
-- Light and dark mode are supported on the public site.
-- The first screen includes a plain-English overview, needs-attention board, and system translation cards for non-technical readers.
-- Search covers account names, phone numbers, credential refs, auth statuses, connector routes, workflow names, and system names.
-- AI-readable guide: https://ghl.prospershield.io/llms.txt
-- AI-readable index: https://ghl.prospershield.io/data/ai-index.json
-- Full data JSON: https://ghl.prospershield.io/data/ghl-live-map.json
-- Markdown report: https://ghl.prospershield.io/docs/GHL_FULL_LIVE_CONNECTION_MAP_2026-06-14.md
-
 ## Search Site
 
 Live site: https://ghl.prospershield.io
 GitHub repo: https://github.com/prosperenergy/ghl-prospershield
 GitHub wiki source: https://github.com/prosperenergy/ghl-prospershield/tree/main/wiki
-Static site source: /Volumes/Samgsung T9/04_Fleet-Ops/ghl/site
-Data file: /Volumes/Samgsung T9/04_Fleet-Ops/ghl/site/data/ghl-live-map.json
+Static site source: /private/tmp/ghl-run
+Data file: /private/tmp/ghl-run/data/ghl-live-map.json
