@@ -13,9 +13,13 @@ let searchInputTimer = null;
 
 const $ = (id) => document.getElementById(id);
 
-function textMatches(value, q) {
+function normalizeQuery(q) {
+  return String(q || "").toLowerCase();
+}
+
+function textMatches(value, q, queryIsNormalized = false) {
   if (!q) return true;
-  const normalizedQuery = String(q).toLowerCase();
+  const normalizedQuery = queryIsNormalized ? q : normalizeQuery(q);
 
   let normalizedValue = "";
   if (value == null) {
@@ -34,9 +38,49 @@ function textMatches(value, q) {
 }
 
 function rowsFor(items) {
-  const q = (state.query || state.quickQuery || "").toLowerCase();
+  const q = normalizeQuery(state.query || state.quickQuery);
   if (!q) return items;
-  return items.filter((item) => textMatches(item, q));
+  return items.filter((item) => textMatches(item, q, true));
+}
+
+function buildRenderIndex(data) {
+  const query = normalizeQuery(state.query || state.quickQuery);
+  const accounts = rowsFor(data.accounts);
+  const credentialSystems = rowsFor(data.credentialMap.systems || []);
+  const credentialRoutes = rowsFor(data.credentialMap.routes || []);
+  const credentialDetails = rowsFor(data.credentialMap.details || []);
+  const n8nWorkflows = rowsFor(data.n8n.workflows || []);
+  const telnyxPhoneNumbers = rowsFor(data.telnyx.phoneNumbers || []);
+  const telnyxMessagingProfiles = rowsFor(data.telnyx.messagingProfiles || []);
+  const telnyxConnections = rowsFor(data.telnyx.connections || []);
+  const ghlBrowserPages = rowsFor(data.ghlBrowserPages || []);
+  const makeScenarios = rowsFor(data.make.scenarios || []);
+  const makeHooks = rowsFor(data.make.hooks || []);
+  const makeConnections = rowsFor(data.make.connections || []);
+  const prosperMainUsers = rowsFor((data.prosperMain.users || []).map((name) => ({ name })));
+  const prosperMainPhones = rowsFor(data.prosperMain.phoneAssignments || []);
+  const phoneRisks = rowsFor(data.phoneRisks || []);
+  const integrationSummary = rowsFor(data.integrationSummary || []);
+
+  return {
+    query,
+    accounts,
+    credentialSystems,
+    credentialRoutes,
+    credentialDetails,
+    n8nWorkflows,
+    telnyxPhoneNumbers,
+    telnyxMessagingProfiles,
+    telnyxConnections,
+    ghlBrowserPages,
+    makeScenarios,
+    makeHooks,
+    makeConnections,
+    prosperMainUsers,
+    prosperMainPhones,
+    phoneRisks,
+    integrationSummary,
+  };
 }
 
 function statusClass(status) {
@@ -128,7 +172,7 @@ function renderPlainSummary(data) {
     .join("");
 }
 
-function renderAttention(data) {
+function renderAttention(data, index) {
   const attention = [
     ...data.phoneRisks.map((risk) => ({ title: risk.title, detail: risk.detail })),
     ...data.credentialMap.systems
@@ -139,7 +183,7 @@ function renderAttention(data) {
       detail: "PROSPER MAIN is readable deeply by API; non-main subaccounts still rely on browser inventory for full detail.",
     },
   ];
-  const rows = rowsFor(attention);
+  const rows = index.query ? rowsFor(attention) : attention;
   $("attention-count").textContent = `${rows.length} visible`;
   $("attention-list").innerHTML = rows
     .map((item) => `<button class="item action-item" type="button" data-search="${escapeHtml(item.title.split(":")[0])}"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></button>`)
@@ -149,7 +193,7 @@ function renderAttention(data) {
   });
 }
 
-function renderGlossary(data) {
+function renderGlossary(data, index) {
   const glossary = [
     ["GHL", "The CRM. It stores subaccounts, leads, opportunities, users, phone assignments, workflows, social planner, and contact records."],
     ["Make.com", "The automation bridge. It moves work between GHL, Monday, quote intake, install projects, GitHub, Netlify, Google/Gemini, and SignNow."],
@@ -159,7 +203,8 @@ function renderGlossary(data) {
     ["GitHub + Netlify + Cloudflare", "The public publishing path. GitHub stores source, Netlify hosts, Cloudflare routes the domain."],
     ["Credential ref", "A variable name that points to a token, endpoint, object id, phone number, user, board, or connector setting. Values are redacted."],
   ];
-  const rows = rowsFor(glossary.map(([title, detail]) => ({ title, detail })));
+  const items = glossary.map(([title, detail]) => ({ title, detail }));
+  const rows = index.query ? rowsFor(items) : items;
   $("glossary-list").innerHTML = rows
     .map((item) => `<button class="item action-item" type="button" data-search="${escapeHtml(item.title)}"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></button>`)
     .join("");
@@ -168,8 +213,8 @@ function renderGlossary(data) {
   });
 }
 
-function renderAccounts(data) {
-  const rows = rowsFor(data.accounts).filter((row) => state.filter === "all" || row.activity.toLowerCase() === state.filter);
+function renderAccounts(index) {
+  const rows = index.accounts.filter((row) => state.filter === "all" || row.activity.toLowerCase() === state.filter);
   $("account-count").textContent = `${rows.length} visible`;
   renderTable($("accounts-table"), [
     { label: "Sub-account", key: "name" },
@@ -184,20 +229,18 @@ function renderAccounts(data) {
   ], rows);
 }
 
-function renderCards(data) {
-  $("phone-risks").innerHTML = data.phoneRisks
-    .filter((item) => !state.query || textMatches(item, state.query))
+function renderCards(index) {
+  $("phone-risks").innerHTML = index.phoneRisks
     .map((item) => `<div class="item"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></div>`)
     .join("");
 
-  $("integration-summary").innerHTML = data.integrationSummary
-    .filter((item) => !state.query || textMatches(item, state.query))
+  $("integration-summary").innerHTML = index.integrationSummary
     .map((item) => `<div class="item"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></div>`)
     .join("");
 }
 
-function renderCredentials(data) {
-  const rows = rowsFor(data.credentialMap.systems || []);
+function renderCredentials(index) {
+  const rows = index.credentialSystems;
   $("credential-count").textContent = `${rows.length} systems visible`;
   renderTable($("credentials-table"), [
     { label: "System", key: "system" },
@@ -208,8 +251,8 @@ function renderCredentials(data) {
   ], rows);
 }
 
-function renderCredentialRoutes(data) {
-  const rows = rowsFor(data.credentialMap.routes || []);
+function renderCredentialRoutes(index) {
+  const rows = index.credentialRoutes;
   $("route-count").textContent = `${rows.length} routes visible`;
   renderTable($("routes-table"), [
     { label: "Route", key: "route" },
@@ -223,8 +266,8 @@ function renderCredentialRoutes(data) {
   ], rows);
 }
 
-function renderCredentialDetails(data) {
-  const rows = rowsFor(data.credentialMap.details || []);
+function renderCredentialDetails(index) {
+  const rows = index.credentialDetails;
   $("credential-detail-count").textContent = `${rows.length} refs visible`;
   renderTable($("credential-detail-table"), [
     { label: "Ref", key: "name" },
@@ -239,8 +282,8 @@ function renderCredentialDetails(data) {
   ], rows);
 }
 
-function renderN8n(data) {
-  const rows = rowsFor(data.n8n.workflows);
+function renderN8n(index) {
+  const rows = index.n8nWorkflows;
   $("n8n-count").textContent = `${rows.length} visible`;
   renderTable($("n8n-table"), [
     { label: "Workflow", key: "name" },
@@ -252,8 +295,8 @@ function renderN8n(data) {
   ], rows);
 }
 
-function renderGhlPages(data) {
-  const rows = rowsFor(data.ghlBrowserPages);
+function renderGhlPages(index) {
+  const rows = index.ghlBrowserPages;
   $("ghl-page-count").textContent = `${rows.length} visible`;
   renderTable($("ghl-pages-table"), [
     { label: "Page", key: "page" },
@@ -261,9 +304,9 @@ function renderGhlPages(data) {
   ], rows);
 }
 
-function renderProsperMain(data) {
-  const users = rowsFor((data.prosperMain.users || []).map((name) => ({ name })));
-  const phones = rowsFor(data.prosperMain.phoneAssignments || []);
+function renderProsperMain(index) {
+  const users = index.prosperMainUsers;
+  const phones = index.prosperMainPhones;
   $("prosper-main-count").textContent = `${users.length} users, ${phones.length} numbers visible`;
   $("prosper-main-users").innerHTML = users.map((user) => `<span class="token">${escapeHtml(user.name)}</span>`).join("");
   renderTable($("prosper-main-phones"), [
@@ -275,10 +318,10 @@ function renderProsperMain(data) {
   ], phones);
 }
 
-function renderMake(data) {
-  const scenarios = rowsFor(data.make.scenarios);
-  const hooks = rowsFor(data.make.hooks);
-  const connections = rowsFor(data.make.connections);
+function renderMake(index) {
+  const scenarios = index.makeScenarios;
+  const hooks = index.makeHooks;
+  const connections = index.makeConnections;
   $("make-count").textContent = `${scenarios.length} scenarios, ${hooks.length} hooks, ${connections.length} connections visible`;
   renderTable($("make-scenarios"), [
     { label: "ID", key: "id" },
@@ -300,10 +343,10 @@ function renderMake(data) {
   ], connections);
 }
 
-function renderTelnyx(data) {
-  const rows = rowsFor(data.telnyx.phoneNumbers);
-  const profiles = rowsFor(data.telnyx.messagingProfiles);
-  const connections = rowsFor(data.telnyx.connections);
+function renderTelnyx(index) {
+  const rows = index.telnyxPhoneNumbers;
+  const profiles = index.telnyxMessagingProfiles;
+  const connections = index.telnyxConnections;
   $("telnyx-count").textContent = `${rows.length} numbers, ${profiles.length} profiles, ${connections.length} connections visible`;
   renderTable($("telnyx-table"), [
     { label: "Number", key: "phoneNumber" },
@@ -362,15 +405,15 @@ function renderChips() {
   });
 }
 
-function renderSearchStatus(data) {
+function renderSearchStatus(index) {
   const q = state.query || state.quickQuery;
   const counts = {
-    accounts: rowsFor(data.accounts).length,
-    systems: rowsFor(data.credentialMap.systems || []).length,
-    routes: rowsFor(data.credentialMap.routes || []).length,
-    refs: rowsFor(data.credentialMap.details || []).length,
-    workflows: rowsFor(data.n8n.workflows || []).length,
-    telnyx: rowsFor(data.telnyx.phoneNumbers || []).length,
+    accounts: index.accounts.length,
+    systems: index.credentialSystems.length,
+    routes: index.credentialRoutes.length,
+    refs: index.credentialDetails.length,
+    workflows: index.n8nWorkflows.length,
+    telnyx: index.telnyxPhoneNumbers.length,
   };
   const label = q ? `Showing matches for "${q}"` : "Showing full map";
   $("search-status").textContent = `${label}: ${counts.accounts} accounts, ${counts.systems} credential systems, ${counts.routes} routes, ${counts.refs} refs, ${counts.workflows} workflows, ${counts.telnyx} phone numbers.`;
@@ -378,23 +421,24 @@ function renderSearchStatus(data) {
 
 function render() {
   const { data } = state;
+  const index = buildRenderIndex(data);
   $("updated").textContent = `Updated ${data.generatedAt}`;
   renderChips();
   renderKpis(data);
   renderPlainSummary(data);
-  renderAttention(data);
-  renderGlossary(data);
-  renderSearchStatus(data);
-  renderAccounts(data);
-  renderCards(data);
-  renderCredentials(data);
-  renderCredentialRoutes(data);
-  renderCredentialDetails(data);
-  renderN8n(data);
-  renderGhlPages(data);
-  renderProsperMain(data);
-  renderMake(data);
-  renderTelnyx(data);
+  renderAttention(data, index);
+  renderGlossary(data, index);
+  renderSearchStatus(index);
+  renderAccounts(index);
+  renderCards(index);
+  renderCredentials(index);
+  renderCredentialRoutes(index);
+  renderCredentialDetails(index);
+  renderN8n(index);
+  renderGhlPages(index);
+  renderProsperMain(index);
+  renderMake(index);
+  renderTelnyx(index);
 }
 
 fetch("./data/ghl-live-map.json")
