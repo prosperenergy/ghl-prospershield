@@ -347,6 +347,10 @@ function renderChips() {
     .join("");
   document.querySelectorAll("[data-filter]").forEach((button) => {
     button.addEventListener("click", () => {
+      if (searchInputTimer !== null) {
+        window.clearTimeout(searchInputTimer);
+        searchInputTimer = null;
+      }
       state.filter = button.dataset.filter;
       state.query = "";
       state.quickQuery = "";
