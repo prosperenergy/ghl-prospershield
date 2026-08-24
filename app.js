@@ -148,7 +148,7 @@ function renderPlainSummary(data) {
     },
     {
       title: "Main Working Account",
-      detail: `PROSPER MAIN is the active center: ${fmt.format(data.accounts.find((account) => account.name === "PROSPER MAIN")?.contacts || 0)} contacts, 47 users, and 15 GHL phone assignments.`,
+      detail: `PROSPER MAIN is the active center: ${fmt.format(data.accounts.find((account) => account.name === "PROSPER MAIN")?.contacts || 0)} contacts, ${fmt.format((data.prosperMain?.users || []).length)} users, and ${fmt.format((data.prosperMain?.phoneAssignments || []).length)} GHL phone assignments.`,
     },
     {
       title: "Automation Layer",
@@ -390,6 +390,10 @@ function renderChips() {
     .join("");
   document.querySelectorAll("[data-filter]").forEach((button) => {
     button.addEventListener("click", () => {
+      if (searchInputTimer !== null) {
+        window.clearTimeout(searchInputTimer);
+        searchInputTimer = null;
+      }
       state.filter = button.dataset.filter;
       state.query = "";
       state.quickQuery = "";
