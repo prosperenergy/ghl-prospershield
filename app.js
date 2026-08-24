@@ -209,7 +209,7 @@ function renderGlossary(data, index) {
     .map((item) => `<button class="item action-item" type="button" data-search="${escapeHtml(item.title)}"><strong>${escapeHtml(item.title)}</strong><p>${escapeHtml(item.detail)}</p></button>`)
     .join("");
   $("glossary-list").querySelectorAll("[data-search]").forEach((button) => {
-    button.addEventListener("click", () => setSearch(button.dataset.title));
+    button.addEventListener("click", () => setSearch(button.dataset.search));
   });
 }
 
